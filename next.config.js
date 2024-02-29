@@ -1,30 +1,19 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+const path = require('path')
+
+/** @type {import('next').NextConfig} */
+
+// Remove this if you're not using Fullcalendar features
+
 module.exports = {
-  reactStrictMode: true,
-  eslint: {
-    // Warning: This allows production builds to successfully complete even if
-    // your project has ESLint errors.
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    // Warning: This allows production builds to successfully complete even if
-    // your project has ESLint errors.
-    ignoreBuildErrors: true,
-  },
+  trailingSlash: true,
+  reactStrictMode: false,
+  webpack: config => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      apexcharts: path.resolve(__dirname, './node_modules/apexcharts-clevision')
+    }
 
-  /*  AssetPrefix
-    --------------------------------------------------------------------------------
-    AssetPrefix is used to determine where the "app" folder is located.
-    Use "/" to have it at the root.
-    Use "./" to have it at the root of the current directory.
-    Learn more at https://nextjs.org/docs/api-reference/next.config.js/cdn-support-with-asset-prefix
-  */
-  // assetPrefix: './',
-
-  /* exportTrailingSlash
-    --------------------------------------------------------------------------------
-    exportTrailingSlash is used to determine whether to export a trailing slash
-    on the generated URL.
-    Learn more at https://nextjs.org/docs/api-reference/next.config.js/export-trailing-slash
-  */
-  // exportTrailingSlash: true,
+    return config
+  }
 }
