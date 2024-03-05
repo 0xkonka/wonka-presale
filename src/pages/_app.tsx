@@ -147,7 +147,7 @@ export default App
 const projectId = 'e973a06523ca5ac45d042a4e0b9d73f7'
 const { wallets } = getDefaultWallets()
 export const wagmiConfig = getDefaultConfig({
-  appName: 'Tren Finance',
+  appName: 'Wonka',
   projectId,
   wallets: [
     ...wallets,
