@@ -32,7 +32,7 @@ import 'cleave.js/dist/addons/cleave-phone.us'
 // Import React Basic Func
 import React, { forwardRef, Ref, ReactElement, useEffect, Fragment, useState } from 'react'
 import { showToast } from '@/hooks/toasts';
-import { useProtocol } from '@/context/ProtocolContext';
+import { usePresale } from '@/context/PresaleContext';
 import { LiquityStoreState } from '@/lib-base';
 import { useLiquitySelector } from '@/lib-react';
 
@@ -126,7 +126,7 @@ const Borrow = () => {
     protocol: {
       connection: { version: contractsVersion, deploymentDate, frontendTag }
     }
-  } = useProtocol()
+  } = usePresale()
 
   const { numberOfTroves, price, lusdInStabilityPool, total, borrowingRate, kickbackRate } = useLiquitySelector(select)
 

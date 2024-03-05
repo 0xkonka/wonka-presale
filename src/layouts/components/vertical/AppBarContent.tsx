@@ -6,7 +6,7 @@ import { styled, Theme } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
 import Button, {ButtonProps} from '@mui/material/Button'
-import { ListItemIcon, ListItemText } from '@mui/material'
+import { ListItemIcon, ListItemText, Typography } from '@mui/material'
 import Link from '@mui/material/Link'
 import MuiMenu, { MenuProps } from '@mui/material/Menu'
 import MuiMenuItem, { MenuItemProps } from '@mui/material/MenuItem'
@@ -67,14 +67,15 @@ const AppBarContent = (props: Props) => {
     <Box sx={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
       <Box className='actions-left' sx={{ mr: 2, display: 'flex', alignItems: 'center' }}>
         <LinkStyled href='/'>
-          <Image src='/images/logos/logo.svg' alt='TrenFi Logo' sizes="100vw"
+          <Typography variant='h2'>WONKA</Typography>
+          {/* <Image src='/images/logos/logo.svg' alt='Wonka Logo' sizes="100vw"
             width={207}
             height={24}
             style={{
               width: '100%',
               height: 18,
             }}
-            priority />
+            priority /> */}
          </LinkStyled>
       </Box>
       <Box className='actions-right' sx={{ display: 'flex', alignItems: 'center' }}>

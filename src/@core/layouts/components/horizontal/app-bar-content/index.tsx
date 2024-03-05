@@ -63,7 +63,8 @@ const AppBarContent = (props: Props) => {
         userAppBarBranding(props)
       ) : (
         <LinkStyled href='/'>
-          <Image src='/images/logos/logo.svg' alt='TrenFi Logo' sizes="100vw"
+          <Typography variant = "h2">WONKA</Typography>
+          {/* <Image src='/images/logos/logo.svg' alt='Wonka Logo' sizes="100vw"
             width={207}
             height={24}
             style={{
@@ -71,7 +72,7 @@ const AppBarContent = (props: Props) => {
               height: 'auto',
               minHeight: 32
             }}
-            priority />
+            priority /> */}
         </LinkStyled>
       )}
       {navHidden ? null : (

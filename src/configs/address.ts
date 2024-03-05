@@ -1,30 +1,33 @@
 export enum SupportedChainId {
     MAINNET = 1,
-    TESTNET = 5,
+    BSC = 56,
+    AVAX = 43114,
+    ARBI = 43621,
+    BASE = 8453,
+    GOERLI = 5,
+    SEPOLIA = 11155111,
     HEX_MAINNET = '0x1',
-    HEX_TESTNET = '0x5'
+    HEX_BSC = '0x38',
+    HEX_AVAX = '0xa86a',
+    HEX_ARBI = '0xa4b1',
+    HEX_BASE = '0x2105',
+    HEX_GOERLI = '0xaa36a7',
+    HEX_SEPOLIA = '0xaa36a7',
 }
 
 type AddressMap = { [chainId: number]: string }
 
-export const TREN_USD_ADDR: AddressMap = {
-    [SupportedChainId.MAINNET]: '',
-    [SupportedChainId.TESTNET]: '0xD2b5D15C1a66587c087cfde9317D58A3876cd187'
+export const USDC_ADDRESS: AddressMap = {
+    [SupportedChainId.GOERLI]: '0xc6B35B4C219AcCfD282021b3994fF10aC72138eA',
+    [SupportedChainId.SEPOLIA]: '',
 }
 
-export const TREN_BOX_ADDR: AddressMap = {
-    [SupportedChainId.MAINNET]: '',
-    [SupportedChainId.TESTNET]: '0x04F95712aB38299D07a37dF0b66f224E7474D613'
+export const WONKA_ADDRESS: AddressMap = {
+    [SupportedChainId.GOERLI]: '0xD414466571e92dFD69344AFC19bAc7A0406C8ED5',
+    [SupportedChainId.SEPOLIA]: '',
 }
 
-export const TREN_MARKET_ADDR: AddressMap[] = [
-    {
-        [SupportedChainId.MAINNET]: '',
-        [SupportedChainId.TESTNET]: '0x86a6f018B38eB8D121150d1ef5CCF81589849290'
-    }
-]
-
-export const MARKET_LENS_ADDR: AddressMap = {
-    [SupportedChainId.MAINNET]: '',
-    [SupportedChainId.TESTNET]: '0x2daF4049d290A2D0413e6697F99c03C09caA1243'
+export const PRESALE_ADDRESS: AddressMap = {
+    [SupportedChainId.GOERLI]: '0x084E9665fAEc06c75B1dEe33aBE448fD1d15f8ec',
+    [SupportedChainId.SEPOLIA]: '',
 }

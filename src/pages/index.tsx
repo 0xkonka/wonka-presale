@@ -5,7 +5,7 @@ const Home = () => {
   const router = useRouter()
   useEffect(
     () => {
-      router.replace('/modules')
+      router.replace('/presale')
     }
   )
   

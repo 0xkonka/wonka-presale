@@ -76,6 +76,7 @@ import '../../styles/globals.css'
 import '@rainbow-me/rainbowkit/styles.css'
 import { WalletConnector } from './components/connect-wallet/WalletConnector'
 import { GlobalProvider } from '@/context/GlobalContext'
+import { PresaleProvider } from '@/context/PresaleContext'
 
 // ** Extend App Props with Emotion
 type ExtendedAppProps = AppProps & {
@@ -113,28 +114,27 @@ const App = (props: ExtendedAppProps) => {
     <CacheProvider value={emotionCache}>
       <Head>
         <title>{`${themeConfig.templateName}`}</title>
-        <meta
-          name='description'
-          content={`${themeConfig.templateName} – TrenFi – is the DeFi Application based on Tren Finance.`}
-        />
-        <meta name='keywords' content='DeFi, TrenFi, Tren Finance, TrenFinance App' />
+        <meta name='description' content={`${themeConfig.templateName} – WONKA – `} />
+        <meta name='keywords' content='DeFi, WONKA' />
         <meta name='viewport' content='initial-scale=1, width=device-width' />
       </Head>
       <Web3Provider>
-        <SettingsProvider {...(setConfig ? { pageSettings: setConfig() } : {})}>
-          <SettingsConsumer>
-            {({ settings }) => {
-              return (
-                <ThemeComponent settings={settings}>
-                  {getLayout(<Component {...pageProps} />)}
-                  <ReactHotToast>
-                    <Toaster position={settings.toastPosition} toastOptions={{ className: 'react-hot-toast' }} />
-                  </ReactHotToast>
-                </ThemeComponent>
-              )
-            }}
-          </SettingsConsumer>
-        </SettingsProvider>
+        <PresaleProvider>
+          <SettingsProvider {...(setConfig ? { pageSettings: setConfig() } : {})}>
+            <SettingsConsumer>
+              {({ settings }) => {
+                return (
+                  <ThemeComponent settings={settings}>
+                    {getLayout(<Component {...pageProps} />)}
+                    <ReactHotToast>
+                      <Toaster position={settings.toastPosition} toastOptions={{ className: 'react-hot-toast' }} />
+                    </ReactHotToast>
+                  </ThemeComponent>
+                )
+              }}
+            </SettingsConsumer>
+          </SettingsProvider>
+        </PresaleProvider>
       </Web3Provider>
     </CacheProvider>
   )
@@ -146,7 +146,7 @@ export default App
 
 const projectId = 'e973a06523ca5ac45d042a4e0b9d73f7'
 const { wallets } = getDefaultWallets()
-const config = getDefaultConfig({
+export const wagmiConfig = getDefaultConfig({
   appName: 'Tren Finance',
   projectId,
   wallets: [
@@ -156,7 +156,7 @@ const config = getDefaultConfig({
       wallets: [argentWallet, trustWallet, ledgerWallet]
     }
   ],
-  chains: [goerli]
+  chains: [goerli, sepolia]
   // ssr: true
 })
 const queryClient = new QueryClient()
@@ -169,7 +169,7 @@ export function Web3Provider({ children }: { children: React.ReactNode }) {
   if (!mounted) return null
 
   return (
-    <WagmiProvider config={config}>
+    <WagmiProvider config={wagmiConfig}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider theme={darkTheme()} initialChain={5}>
           {children}

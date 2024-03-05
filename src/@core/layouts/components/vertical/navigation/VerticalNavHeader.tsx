@@ -92,14 +92,15 @@ const VerticalNavHeader = (props: Props) => {
         userNavMenuBranding(props)
       ) : (
         <LinkStyled href='/'>
-          <Image src='/images/logos/logo.svg' alt='TrenFi Logo' sizes="100vw"
+          <Typography variant='h2'>WONKA</Typography>
+          {/* <Image src='/images/logos/logo.svg' alt='Wonka Logo' sizes="100vw"
             width={207}
             height={24}
             style={{
               width: '100%',
               height: 18,
             }}
-            priority />
+            priority /> */}
         </LinkStyled>
       )}
       <Icon icon='carbon:close' fontSize={42} onClick={toggleNavVisibility}/>
