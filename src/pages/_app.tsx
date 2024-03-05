@@ -74,7 +74,6 @@ import 'src/iconify-bundle/icons-bundle-react'
 // ** Global css styles
 import '../../styles/globals.css'
 import '@rainbow-me/rainbowkit/styles.css'
-import { WalletConnector } from './components/connect-wallet/WalletConnector'
 import { GlobalProvider } from '@/context/GlobalContext'
 import { PresaleProvider } from '@/context/PresaleContext'
 
