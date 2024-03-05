@@ -12,7 +12,7 @@ import LaunchpadTime from './components/LaunchpadTime'
 import { usePresale } from '@/context/PresaleContext'
 import { formatUnits } from 'viem'
 import LaunchpadAction from './components/LaunchpadAction'
-import Stastics from './components/stastics'
+import Stastics from './components/Stastics'
 import UserStatus from './components/UserStatus'
 
 export type LaunchpadStatus = 'upcoming' | 'live' | 'ended' //'upcoming' | 'live' | 'filled' | 'ended' | 'claimable'
