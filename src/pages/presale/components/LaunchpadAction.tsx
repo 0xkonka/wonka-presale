@@ -144,7 +144,7 @@ const LaunchpadAction: React.FC<Props> = ({ presaleState }) => {
             }}
             value={contributeAmount}
             type='number'
-            placeholder={formatUnits(usdcBalance!, 6) ?? 0}
+            placeholder={usdcBalance ? formatUnits(usdcBalance, 6) : '0'}
             onChange={e => setContributeAmount(e.target.value)}
           />
           <Button variant='contained' color='success' onClick={() => onClaim()} disabled={isPending || isConfirming}>

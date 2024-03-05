@@ -24,12 +24,12 @@ const UserStatus = () => {
         <Divider />
         <Stack direction={'row'} justifyContent={'space-between'}>
           <Typography sx={{ mb: 1.5 }}>Contributed Amount</Typography>
-          <Typography>{(+formatUnits(contributedAmount!, 6)).toFixed(2)} $</Typography>
+          <Typography>{contributedAmount ? (+formatUnits(contributedAmount!, 6)).toFixed(2) : 0} $</Typography>
         </Stack>
         <Divider />
         <Stack direction={'row'} justifyContent={'space-between'}>
           <Typography sx={{ mb: 1.5 }}>Claimable Amount</Typography>
-          <Typography>{(+formatEther(claimableAmount!)).toFixed(2)} Wonka</Typography>
+          <Typography>{claimableAmount ? (+formatEther(claimableAmount!)).toFixed(2) : 0} Wonka</Typography>
         </Stack>
       </CardContent>
     </Card>
