@@ -11,7 +11,9 @@ import { PresaleConfig, UserInfo } from '@/types/presale'
 
 type PresaleContextValue = {
   account?: string
-  config: PresaleConfig
+  config?: PresaleConfig
+  wonkaPrice: bigint
+  capAmount: bigint
   presaleLevel: number
   totalContributedAmount: bigint
   presaleStatus: number
@@ -25,27 +27,16 @@ type PresaleProviderProps = {
   // loader?: React.ReactNode
 }
 
-const initialConfig: PresaleConfig = {
-  usdc: '',
-  presaleToken: '',
-  price: BigInt(1),
-  startTime: BigInt(1),
-  endTime: BigInt(2),
-  softcap: BigInt(1),
-  hardcap: BigInt(2),
-  capPerLevel: BigInt(1),
-  minContribution: BigInt(1),
-  maxContribution: BigInt(2)
-}
-
 export const PresaleProvider: React.FC<PresaleProviderProps> = ({ children }) => {
   const { address: account } = useAccount()
   const chainId = useChainId()
 
-  const [config, setConfig] = useState<PresaleConfig>(initialConfig)
-  const [presaleLevel, setPresaleLevel] = useState<number>(0)
+  const [config, setConfig] = useState<PresaleConfig>()
+  const [presaleLevel, setPresaleLevel] = useState(0)
   const [totalContributed, setTotalContributed] = useState<bigint>(BigInt(0))
   const [presaleStatus, setPresaleStatus] = useState(0)
+  const [wonkaPrice, setPrice] = useState<bigint>(BigInt(0))
+  const [capAmount, setCapAmount] = useState<bigint>(BigInt(0))
   const [userInfo, sertUserInfo] = useState<UserInfo>()
 
   useEffect(() => {
@@ -76,41 +67,44 @@ export const PresaleProvider: React.FC<PresaleProviderProps> = ({ children }) =>
             ...presaleContract,
             functionName: 'presaleStatus',
             args: []
+          },
+          {
+            ...presaleContract,
+            functionName: 'price',
+            args: ['0']
+          },
+          {
+            ...presaleContract,
+            functionName: 'capPerLevel',
+            args: ['0']
           }
         ]
       })
 
-      if (result[0].status === 'success') {
-        const presaleConfig = result[0].result as any[]
-        const _config: PresaleConfig = {
-          usdc: presaleConfig[0],
-          presaleToken: presaleConfig[1],
-          price: presaleConfig[2],
-          startTime: presaleConfig[3],
-          endTime: presaleConfig[4],
-          softcap: presaleConfig[5],
-          hardcap: presaleConfig[6],
-          capPerLevel: presaleConfig[7],
-          minContribution: presaleConfig[7],
-          maxContribution: presaleConfig[8]
-        }
-        setConfig(_config)
+      const presaleConfig = result[0].result as any[]
+      const _config: PresaleConfig = {
+        usdc: presaleConfig[0],
+        presaleToken: presaleConfig[1],
+        startTime: presaleConfig[2],
+        endTime: presaleConfig[3],
+        softcap: presaleConfig[4],
+        hardcap: presaleConfig[5],
+        minContribution: presaleConfig[6],
+        maxContribution: presaleConfig[7]
       }
+      setConfig(_config)
 
-      if (result[1].status === 'success') {
-        const _presaleLevel = result[1].result as number
-        setPresaleLevel(_presaleLevel)
-      }
+      const _presaleLevel = Number(result[1].result)
+      setPresaleLevel(_presaleLevel)
+      const _totalContributed = result[2].result as bigint
+      setTotalContributed(_totalContributed)
+      const _presaleStatus = Number(result[3].result)
+      setPresaleStatus(_presaleStatus)
 
-      if (result[2].status === 'success') {
-        const _totalContributed = result[2].result as bigint
-        setTotalContributed(_totalContributed)
-      }
-
-      if (result[2].status === 'success') {
-        const _presaleStatus = result[3].result as number
-        setPresaleStatus(_presaleStatus)
-      }
+      const _price = result[4].result as bigint
+      setPrice(_price)
+      const _capAmount = result[5].result as bigint
+      setCapAmount(_capAmount)
     }
     fetchPresaleConfig()
   }, [chainId, account])
@@ -140,7 +134,16 @@ export const PresaleProvider: React.FC<PresaleProviderProps> = ({ children }) =>
 
   return (
     <PresaleContext.Provider
-      value={{ account, config, presaleLevel, totalContributedAmount: totalContributed, presaleStatus,  userInfo }}
+      value={{
+        account,
+        config,
+        wonkaPrice,
+        capAmount,
+        presaleLevel,
+        totalContributedAmount: totalContributed,
+        presaleStatus,
+        userInfo
+      }}
     >
       {config && presaleLevel !== undefined && totalContributed !== undefined ? children : null}
     </PresaleContext.Provider>

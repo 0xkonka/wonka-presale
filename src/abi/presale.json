@@ -85,6 +85,25 @@
         "type": "function"
     },
     {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "name": "capPerLevel",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
         "inputs": [],
         "name": "claim",
         "outputs": [],
@@ -181,11 +200,6 @@
                     },
                     {
                         "internalType": "uint256",
-                        "name": "price",
-                        "type": "uint256"
-                    },
-                    {
-                        "internalType": "uint256",
                         "name": "startTime",
                         "type": "uint256"
                     },
@@ -205,11 +219,6 @@
                         "type": "uint256"
                     },
                     {
-                        "internalType": "uint256[]",
-                        "name": "capPerLevel",
-                        "type": "uint256[]"
-                    },
-                    {
                         "internalType": "uint256",
                         "name": "minContribution",
                         "type": "uint256"
@@ -223,6 +232,16 @@
                 "internalType": "struct Presale.PresaleConfig",
                 "name": "_config",
                 "type": "tuple"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "_price",
+                "type": "uint256[]"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "_capPerLevel",
+                "type": "uint256[]"
             }
         ],
         "name": "initialize",
@@ -269,11 +288,6 @@
                 "internalType": "address",
                 "name": "presaleToken",
                 "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "price",
-                "type": "uint256"
             },
             {
                 "internalType": "uint256",
@@ -336,6 +350,25 @@
         "type": "function"
     },
     {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "name": "price",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
         "inputs": [],
         "name": "renounceOwnership",
         "outputs": [],
@@ -383,7 +416,7 @@
     },
     {
         "inputs": [],
-        "name": "updatePresaleLevel",
+        "name": "updatePresaleStatus",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"

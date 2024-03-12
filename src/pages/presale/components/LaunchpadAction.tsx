@@ -26,8 +26,8 @@ const LaunchpadAction: React.FC<Props> = ({ presaleState }) => {
 
   const { address: account } = useAccount()
   const chainId = useChainId()
-  const { config, totalContributedAmount, presaleLevel, userInfo } = usePresale()
-  const { minContribution: minPerTx, maxContribution: maxPerUser } = config
+  const { config, totalContributedAmount, userInfo } = usePresale()
+  const { minContribution: minPerTx, maxContribution: maxPerUser } = config || {}
   const { contributedAmount: userContributedAmount } = userInfo || {}
 
   const { onApprove, onContribute, onClaim, isPending, isConfirming, isConfirmed } = usePresaleContract()
@@ -76,7 +76,7 @@ const LaunchpadAction: React.FC<Props> = ({ presaleState }) => {
   // }
 
   const handleContribute = () => {
-    if (formatUnits(allowance!, 6) > contributeAmount) {
+    if ((allowance ? +formatUnits(allowance, 6) : 0) > +contributeAmount) {
       onApprove(contributeAmount)
     } else onContribute(contributeAmount)
   }
@@ -148,11 +148,11 @@ const LaunchpadAction: React.FC<Props> = ({ presaleState }) => {
             onChange={e => setContributeAmount(e.target.value)}
           />
           <Button variant='contained' color='success' onClick={() => onClaim()} disabled={isPending || isConfirming}>
-            {+formatUnits(allowance!, 6) > +contributeAmount ? 'Contribute' : 'Approve'}
+            {(allowance ? +formatUnits(allowance, 6) : 0) > +contributeAmount ? 'Contribute' : 'Approve'}
           </Button>
         </Stack>
         <Typography>
-          Balance : {formatUnits(usdcBalance!, 6) ?? 0} {buyTokenSymbol}{' '}
+          Balance : {usdcBalance ? formatUnits(usdcBalance, 6) : 0} {buyTokenSymbol}{' '}
         </Typography>
       </>
     )

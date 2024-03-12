@@ -18,16 +18,16 @@ export enum SupportedChainId {
 type AddressMap = { [chainId: number]: string }
 
 export const USDC_ADDRESS: AddressMap = {
-    [SupportedChainId.GOERLI]: '0xc6B35B4C219AcCfD282021b3994fF10aC72138eA',
-    [SupportedChainId.SEPOLIA]: '',
+    [SupportedChainId.GOERLI]: '',
+    [SupportedChainId.SEPOLIA]: '0xB88b5F025382AaDaC2F87A01f950223e7Ee68a1b',
 }
 
 export const WONKA_ADDRESS: AddressMap = {
-    [SupportedChainId.GOERLI]: '0xD414466571e92dFD69344AFC19bAc7A0406C8ED5',
-    [SupportedChainId.SEPOLIA]: '',
+    [SupportedChainId.GOERLI]: '',
+    [SupportedChainId.SEPOLIA]: '0x9848422A708960e6f416f719006328077Ad1816A',
 }
 
 export const PRESALE_ADDRESS: AddressMap = {
-    [SupportedChainId.GOERLI]: '0x084E9665fAEc06c75B1dEe33aBE448fD1d15f8ec',
-    [SupportedChainId.SEPOLIA]: '',
+    [SupportedChainId.GOERLI]: '',
+    [SupportedChainId.SEPOLIA]: '0xeBC65342d89f1A11F7fc21A6D7864D2C108B7aFe',
 }

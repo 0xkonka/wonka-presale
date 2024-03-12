@@ -155,7 +155,10 @@ export const wagmiConfig = getDefaultConfig({
       wallets: [argentWallet, trustWallet, ledgerWallet]
     }
   ],
-  chains: [goerli, sepolia]
+  chains: [sepolia],
+  transports:{
+    [sepolia.id]:  http("https://rpc-sepolia.rockx.com"),  
+  }
   // ssr: true
 })
 const queryClient = new QueryClient()

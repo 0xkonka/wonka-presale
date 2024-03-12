@@ -49,7 +49,7 @@ type ThemeConfig = {
 
 const themeConfig: ThemeConfig = {
   // ** Layout Configs
-  templateName: 'TrenFinance' /* App Name */,
+  templateName: 'Wonka' /* App Name */,
   layout: 'horizontal' /* vertical | horizontal */,
   mode: 'dark' as Mode /* light | dark | semi-dark /*! Note: semi-dark value will only work for Vertical Layout */,
   direction: 'ltr' /* ltr | rtl */,

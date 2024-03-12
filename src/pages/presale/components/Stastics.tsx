@@ -24,8 +24,10 @@ const Stastics = () => {
   const { address: account } = useAccount()
   const { config, totalContributedAmount, presaleLevel } = usePresale()
 
-  const startTimeFormat = formatDateTime(Number(config.startTime) * 1000)
-  const endTimeFormat = formatDateTime(Number(config.endTime) * 1000)
+  const startTimeFormat = formatDateTime(Number(config?.startTime) * 1000)
+  const endTimeFormat = formatDateTime(Number(config?.endTime) * 1000)
+
+  if (!config) return <></>
 
   return (
     <Card sx={{ minWidth: 275, background: '#343e52' }}>
@@ -76,7 +78,7 @@ const Stastics = () => {
         <Divider />
         <Stack direction={'row'} justifyContent={'space-between'}>
           <Typography sx={{ mb: 1.5 }}>Presale Level</Typography>
-          <Typography>{Number(presaleLevel)}</Typography>
+          <Typography>{presaleLevel + 1}</Typography>
         </Stack>
         <Divider />
       </CardContent>

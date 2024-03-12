@@ -6,7 +6,7 @@ import { Typography, Box, Stack, useTheme, Theme, useMediaQuery, Grid, Card, Car
 import React, { useEffect, useState } from 'react'
 
 // Import Subviews
-import HeaderInfo from '@/pages/presale/components/headerInfo'
+import HeaderInfo from '@/pages/presale/components/HeaderInfo'
 import { useAccount } from 'wagmi'
 import LaunchpadTime from './components/LaunchpadTime'
 import { usePresale } from '@/context/PresaleContext'
@@ -14,6 +14,7 @@ import { formatUnits } from 'viem'
 import LaunchpadAction from './components/LaunchpadAction'
 import Stastics from './components/Stastics'
 import UserStatus from './components/UserStatus'
+import PresaleTable from './components/PresaleTable'
 
 export type LaunchpadStatus = 'upcoming' | 'live' | 'ended' //'upcoming' | 'live' | 'filled' | 'ended' | 'claimable'
 
@@ -21,7 +22,7 @@ const Presale = () => {
   const { address: account } = useAccount()
   const { config, totalContributedAmount, presaleLevel, presaleStatus } = usePresale()
 
-  const contributedPercent = ((Number(totalContributedAmount) / Number(config.hardcap)) * 100).toFixed(4)
+  const contributedPercent = ((Number(totalContributedAmount) / Number(config?.hardcap)) * 100).toFixed(4)
 
   const [presaleState, setPresaleState] = React.useState({
     status: 'upcoming' as LaunchpadStatus,
@@ -32,8 +33,8 @@ const Presale = () => {
   useEffect(() => {
     const interval = setInterval(async () => {
       const currentTime = Math.floor(Date.now() / 1000)
-      const secondsUntilStart = Number(config.startTime) - currentTime
-      const secondsUntilEnd = Number(config.endTime) - currentTime
+      const secondsUntilStart = Number(config?.startTime) - currentTime
+      const secondsUntilEnd = Number(config?.endTime) - currentTime
 
       let status: LaunchpadStatus
 
@@ -94,7 +95,7 @@ const Presale = () => {
                   </Box>
                   <Stack direction='row' sx={{ justifyContent: 'space-between' }}>
                     <Typography variant='subtitle2'>{formatUnits(totalContributedAmount, 6)}$</Typography>
-                    <Typography variant='subtitle2'>{formatUnits(config.hardcap, 6)}$</Typography>
+                    <Typography variant='subtitle2'>{formatUnits(config?.hardcap, 6)}$</Typography>
                   </Stack>
 
                   {account && <LaunchpadAction presaleState={presaleState} />}
@@ -102,6 +103,9 @@ const Presale = () => {
               </CardContent>
             </Card>
             <UserStatus />
+          </Grid>
+          <Grid item xs={12} md={12}>
+            <PresaleTable />
           </Grid>
         </Grid>
       </Stack>

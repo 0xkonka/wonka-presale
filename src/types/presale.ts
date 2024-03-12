@@ -1,12 +1,10 @@
 export type PresaleConfig = {
     usdc: string
     presaleToken: string
-    price: bigint
     startTime: bigint
     endTime: bigint
     softcap: bigint
     hardcap: bigint
-    capPerLevel: bigint
     minContribution: bigint
     maxContribution: bigint
 }
