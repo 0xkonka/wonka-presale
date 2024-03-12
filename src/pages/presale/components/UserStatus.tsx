@@ -4,8 +4,13 @@ import Typography from '@mui/material/Typography'
 import { usePresale } from '@/context/PresaleContext'
 import { Card, CardContent, Grid, Slider, Stack } from '@mui/material'
 import { formatEther, formatUnits } from 'viem'
+import { PresaleConfig } from '@/types/presale'
 
-const UserStatus = () => {
+interface Props {
+  config: PresaleConfig
+}
+
+const UserStatus = ({ config }: Props) => {
   const { userInfo } = usePresale()
 
   const { contributedAmount, claimableAmount, status } = userInfo || {}

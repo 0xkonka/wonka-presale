@@ -5,16 +5,6 @@ import { PRESALE_ADDRESS, USDC_ADDRESS } from '@/configs/address'
 import PRESALE_ABI from '@/abi/presale.json'
 import { erc20Abi, parseUnits } from 'viem'
 
-export interface PresaleInfo {
-  onApprove: (approveAmount: string) => void
-  onContribute: (contributeAmount: string) => void
-  onClaim: () => void
-  txhash: '0x{string}' | undefined
-  isPending: boolean
-  isConfirming: boolean
-  isConfirmed: boolean
-}
-
 const usePresaleContract = () => {
   const { address: account } = useAccount()
   const chainId = useChainId()
@@ -102,7 +92,7 @@ const usePresaleContract = () => {
   //   }
   // }, [tokenSaleContract])
 
-  return { onClaim, onContribute, onApprove, txhash, isPending, isConfirming, isConfirmed }
+  return { onClaim, onContribute, onApprove, txhash, isPending, isConfirming, isConfirmed, error }
 }
 
 export default usePresaleContract

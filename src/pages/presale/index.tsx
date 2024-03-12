@@ -51,13 +51,15 @@ const Presale = () => {
     return () => clearInterval(interval)
   }, [config, presaleStatus])
 
+  if (!config) return <></>
+
   return (
     <Box>
       <HeaderInfo />
       <Stack direction='column' alignItems='center'>
         <Grid container spacing={10} maxWidth={1200}>
           <Grid item xs={12} md={7}>
-            <Stastics />
+            <Stastics config={config} />
           </Grid>
           <Grid item xs={12} md={5}>
             <Card sx={{ minWidth: 275, background: '#343e52', marginBottom: 8 }}>
@@ -95,17 +97,17 @@ const Presale = () => {
                   </Box>
                   <Stack direction='row' sx={{ justifyContent: 'space-between' }}>
                     <Typography variant='subtitle2'>{formatUnits(totalContributedAmount, 6)}$</Typography>
-                    <Typography variant='subtitle2'>{formatUnits(config?.hardcap, 6)}$</Typography>
+                    <Typography variant='subtitle2'>{formatUnits(config.hardcap, 6)}$</Typography>
                   </Stack>
 
-                  {account && <LaunchpadAction presaleState={presaleState} />}
+                  {account && <LaunchpadAction  config={config} presaleState={presaleState} />}
                 </Stack>
               </CardContent>
             </Card>
-            <UserStatus />
+            <UserStatus config={config} />
           </Grid>
           <Grid item xs={12} md={12}>
-            <PresaleTable />
+            <PresaleTable config={config} />
           </Grid>
         </Grid>
       </Stack>

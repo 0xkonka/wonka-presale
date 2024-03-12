@@ -5,6 +5,7 @@ import { usePresale } from '@/context/PresaleContext'
 import { formatUnits } from 'ethers/lib/utils'
 import { Box, Card, CardContent, Grid, Slider, Stack } from '@mui/material'
 import { useAccount } from 'wagmi'
+import { PresaleConfig } from '@/types/presale'
 
 function formatDateTime(timestamp: number) {
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -20,9 +21,13 @@ function formatDateTime(timestamp: number) {
   return `${day} ${month} ${year} , ${hours}:${minutes}:${seconds}`
 }
 
-const Stastics = () => {
+interface Props {
+  config: PresaleConfig
+}
+
+const Stastics: React.FC<Props> = ({ config }) => {
   const { address: account } = useAccount()
-  const { config, totalContributedAmount, presaleLevel } = usePresale()
+  const { totalContributedAmount, presaleLevel } = usePresale()
 
   const startTimeFormat = formatDateTime(Number(config?.startTime) * 1000)
   const endTimeFormat = formatDateTime(Number(config?.endTime) * 1000)

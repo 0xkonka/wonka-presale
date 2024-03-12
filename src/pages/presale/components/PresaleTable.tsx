@@ -10,6 +10,7 @@ import Paper from '@mui/material/Paper'
 import { usePresale } from '@/context/PresaleContext'
 import { LoDashExplicitNumberArrayWrapper } from 'lodash'
 import { formatEther, formatUnits, parseUnits } from 'viem'
+import { PresaleConfig } from '@/types/presale'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -54,7 +55,11 @@ interface levelArray {
   // supplyPercent: number
 }
 
-const PresaleTable: React.FC = () => {
+interface Props {
+  config: PresaleConfig
+}
+
+const PresaleTable: React.FC<Props> = ({ config }) => {
   const { wonkaPrice, capAmount, totalContributedAmount, userInfo } = usePresale()
 
   const [levelArray, setLevelArray] = React.useState<levelArray[]>([])
