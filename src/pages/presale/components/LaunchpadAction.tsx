@@ -138,27 +138,6 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
     return (
       <>
         <Stack direction={'row'} justifyContent={'space-between'}>
-          <CustomTextField
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position='end'>
-                  <Button
-                    onClick={() =>
-                      setContributeAmount(
-                        (usdcBalance! ?? 0) < maxPerUser ? formatUnits(usdcBalance!, 6) : formatUnits(maxPerUser, 6)
-                      )
-                    }
-                  >
-                    MAX
-                  </Button>
-                </InputAdornment>
-              )
-            }}
-            value={contributeAmount}
-            type='number'
-            placeholder={usdcBalance ? formatUnits(usdcBalance, 6) : '0'}
-            onChange={e => setContributeAmount(e.target.value)}
-          />
           <Button variant='contained' color='success' onClick={() => onClaim()} disabled={isPending || isConfirming}>
             Claim
           </Button>

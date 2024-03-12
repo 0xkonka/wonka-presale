@@ -29,5 +29,5 @@ export const WONKA_ADDRESS: AddressMap = {
 
 export const PRESALE_ADDRESS: AddressMap = {
     [SupportedChainId.GOERLI]: '',
-    [SupportedChainId.SEPOLIA]: '0xeBC65342d89f1A11F7fc21A6D7864D2C108B7aFe',
+    [SupportedChainId.SEPOLIA]: '0x9ba0b4C9F5B41Acb174af65a22F85355fBD6d16A',
 }
