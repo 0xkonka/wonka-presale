@@ -83,7 +83,7 @@ const Stastics: React.FC<Props> = ({ config }) => {
         <Divider />
         <Stack direction={'row'} justifyContent={'space-between'}>
           <Typography sx={{ mb: 1.5 }}>Presale Level</Typography>
-          <Typography>{presaleLevel}</Typography>
+          <Typography>{presaleLevel + 1}</Typography>
         </Stack>
         <Divider />
       </CardContent>
