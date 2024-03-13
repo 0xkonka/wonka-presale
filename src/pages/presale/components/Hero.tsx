@@ -1,7 +1,7 @@
 // MUI components import
 import { Box, Typography, Stack, Theme, useTheme, useMediaQuery } from '@mui/material'
 
-const HeaderInfo = () => {
+const Hero = () => {
   const theme: Theme = useTheme()
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'))
   const textStyle = {
@@ -38,4 +38,4 @@ const HeaderInfo = () => {
   )
 }
 
-export default HeaderInfo
+export default Hero

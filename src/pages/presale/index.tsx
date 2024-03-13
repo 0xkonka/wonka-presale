@@ -6,7 +6,7 @@ import { Typography, Box, Stack, useTheme, Theme, useMediaQuery, Grid, Card, Car
 import React, { useEffect, useState } from 'react'
 
 // Import Subviews
-import HeaderInfo from '@/pages/presale/components/HeaderInfo'
+import Hero from '@/pages/presale/components/Hero'
 import { useAccount } from 'wagmi'
 import LaunchpadTime from './components/LaunchpadTime'
 import { usePresale } from '@/context/PresaleContext'
@@ -55,7 +55,7 @@ const Presale = () => {
 
   return (
     <Box>
-      <HeaderInfo />
+      <Hero />
       <Stack direction='column' alignItems='center'>
         <Grid container spacing={10} maxWidth={1200}>
           <Grid item xs={12} md={7}>
