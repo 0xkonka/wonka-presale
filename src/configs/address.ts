@@ -6,6 +6,7 @@ export enum SupportedChainId {
     BASE = 8453,
     GOERLI = 5,
     SEPOLIA = 11155111,
+    FUJI = 43113,
     HEX_MAINNET = '0x1',
     HEX_BSC = '0x38',
     HEX_AVAX = '0xa86a',
@@ -13,6 +14,7 @@ export enum SupportedChainId {
     HEX_BASE = '0x2105',
     HEX_GOERLI = '0xaa36a7',
     HEX_SEPOLIA = '0xaa36a7',
+    HEX_FUJI = '0xa869'
 }
 
 type AddressMap = { [chainId: number]: string }
@@ -20,14 +22,23 @@ type AddressMap = { [chainId: number]: string }
 export const USDC_ADDRESS: AddressMap = {
     [SupportedChainId.GOERLI]: '',
     [SupportedChainId.SEPOLIA]: '0xB88b5F025382AaDaC2F87A01f950223e7Ee68a1b',
+    [SupportedChainId.FUJI]: '0xD7df0E1B0ee1618638aAE3DD34B869eCA4660D13'
 }
 
 export const WONKA_ADDRESS: AddressMap = {
     [SupportedChainId.GOERLI]: '',
     [SupportedChainId.SEPOLIA]: '0x9848422A708960e6f416f719006328077Ad1816A',
+    [SupportedChainId.FUJI]: '0x9c73CF53819E7fE7933950db8EBa83a1fB3b8f54'
 }
 
 export const PRESALE_ADDRESS: AddressMap = {
     [SupportedChainId.GOERLI]: '',
     [SupportedChainId.SEPOLIA]: '0x591AF082f3411EB00efAcAe4eF41f1E48b383efD',
+    [SupportedChainId.FUJI]: '0x75ed3C727Bc077e753C6E798Bf7Ba24c2E2999D0'
+}
+
+export const LZEndpointAddress: AddressMap = {
+    [SupportedChainId.GOERLI]: '',
+    [SupportedChainId.SEPOLIA]: '0xae92d5aD7583AD66E49A0c67BAd18F6ba52dDDc1',
+    [SupportedChainId.FUJI]: '0x93f54D755A063cE7bB9e6Ac47Eccc8e33411d706'
 }

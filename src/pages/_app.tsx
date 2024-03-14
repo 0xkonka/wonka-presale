@@ -31,7 +31,7 @@ import {
 import { Chain } from '@rainbow-me/rainbowkit'
 
 import { http, createConfig, WagmiProvider } from 'wagmi'
-import { mainnet, goerli, sepolia } from 'wagmi/chains'
+import { mainnet, goerli, sepolia, avalancheFuji } from 'wagmi/chains'
 
 // ** Loader Import
 import NProgress from 'nprogress'
@@ -155,9 +155,10 @@ export const wagmiConfig = getDefaultConfig({
       wallets: [argentWallet, trustWallet, ledgerWallet]
     }
   ],
-  chains: [sepolia],
-  transports:{
-    [sepolia.id]:  http("https://rpc-sepolia.rockx.com"),  
+  chains: [sepolia, avalancheFuji],
+  transports: {
+    [sepolia.id]: http('https://rpc-sepolia.rockx.com'),
+    [avalancheFuji.id]: http('https://api.avax-test.network/ext/bc/C/rpc')
   }
   // ssr: true
 })
