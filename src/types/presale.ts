@@ -12,7 +12,8 @@ export type PresaleConfig = {
 export type UserInfo = {
     contributedAmount: bigint
     claimableAmount: bigint
-    status: FunderStatus
+    pendingReward: bigint
+    status: boolean
 }
 
 export enum FunderStatus {

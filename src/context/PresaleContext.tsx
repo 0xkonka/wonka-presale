@@ -49,7 +49,6 @@ export const PresaleProvider: React.FC<PresaleProviderProps> = ({ children }) =>
   } as const
   // Get Presale Config
   const fetchPresaleConfig = async () => {
-    console.log("asdf")
     const result = await multicall(wagmiConfig, {
       contracts: [
         {
@@ -74,7 +73,7 @@ export const PresaleProvider: React.FC<PresaleProviderProps> = ({ children }) =>
         },
         {
           ...presaleContract,
-          functionName: 'price',
+          functionName: 'wonkaPrice',
           args: ['0']
         },
         {
@@ -111,31 +110,42 @@ export const PresaleProvider: React.FC<PresaleProviderProps> = ({ children }) =>
     setCapAmount(_capAmount)
   }
 
-  // useEffect(() => {
-
   // Get User Info
   const fetchUserInfo = async () => {
     if (account) {
-      const result: any = await readContract(wagmiConfig, {
-        abi: PRESALE_ABI,
-        address: PRESALE_ADDRESS[chainId] as '0x{string}',
-        functionName: 'funders',
-        args: [account]
+
+      const result = await multicall(wagmiConfig, {
+        contracts: [
+          {
+            ...presaleContract,
+            functionName: 'funders',
+            args: [account]
+          },
+          {
+            ...presaleContract,
+            functionName: 'pendingWonka',
+            args: [account]
+          },
+
+        ]
       })
 
-      const _userInfo: UserInfo = {
-        contributedAmount: result[0],
-        claimableAmount: result[1],
-        status: result[2]
+      const _userInfo = result[0].result as any;
+      const _pendingReward = result[1].result as bigint;
+
+      console.log('_pendingReward', result[1].result)
+
+      const userInfo: UserInfo = {
+        contributedAmount: _userInfo[0] as bigint,
+        claimableAmount: _userInfo[1] as bigint,
+        pendingReward: _pendingReward,
+        status: _userInfo[4] as boolean
       }
 
-      sertUserInfo(_userInfo)
+      sertUserInfo(userInfo)
     }
   }
-  // fetchUserInfo()
-
-  // }, [account, chainId])
-
+  
   usePolling(fetchPresaleConfig, POLLING_INTERVAL, false, [chainId])
   usePolling(fetchUserInfo, POLLING_INTERVAL, false, [account, chainId])
 

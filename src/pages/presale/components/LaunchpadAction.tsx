@@ -104,7 +104,9 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
             }}
             value={contributeAmount}
             type='number'
-            placeholder={(usdcBalance || 0) < maxPerUser ? formatUnits(usdcBalance!, 6) : formatUnits(maxPerUser, 6)}
+            placeholder={
+              usdcBalance ? (usdcBalance < maxPerUser ? formatUnits(usdcBalance!, 6) : formatUnits(maxPerUser, 6)) : '0'
+            }
             onChange={e => setContributeAmount(e.target.value)}
           />
           {(allowance ? +formatUnits(allowance, 6) : 0) >= +contributeAmount ? (

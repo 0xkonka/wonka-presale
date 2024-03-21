@@ -13,7 +13,7 @@ interface Props {
 const UserStatus = ({ config }: Props) => {
   const { userInfo } = usePresale()
 
-  const { contributedAmount, claimableAmount, status } = userInfo || {}
+  const { contributedAmount, claimableAmount, pendingReward, status } = userInfo || {}
 
   return (
     <Card sx={{ minWidth: 275, background: '#343e52' }}>
@@ -24,17 +24,22 @@ const UserStatus = ({ config }: Props) => {
         <Divider />
         <Stack direction={'row'} justifyContent={'space-between'}>
           <Typography sx={{ mb: 1.5 }}>Status</Typography>
-          <Typography>{status === 2 ? 'Claimed' : status === 1 ? 'Invested' : 'None'}</Typography>
+          <Typography>{status ? 'Claimed' : Number(contributedAmount) > 0 ? 'Invested' : 'None'}</Typography>
         </Stack>
         <Divider />
         <Stack direction={'row'} justifyContent={'space-between'}>
           <Typography sx={{ mb: 1.5 }}>Contributed Amount</Typography>
-          <Typography>{contributedAmount ? (+formatUnits(contributedAmount!, 6)).toFixed(2) : 0} $</Typography>
+          <Typography>{contributedAmount ? (+formatUnits(contributedAmount, 6)).toFixed(2) : 0} $</Typography>
         </Stack>
         <Divider />
         <Stack direction={'row'} justifyContent={'space-between'}>
           <Typography sx={{ mb: 1.5 }}>Claimable Amount</Typography>
-          <Typography>{claimableAmount ? (+formatEther(claimableAmount!)).toFixed(2) : 0} Wonka</Typography>
+          <Typography>{claimableAmount ? (+formatEther(claimableAmount)).toFixed(2) : 0} Wonka</Typography>
+        </Stack>
+        <Divider />
+        <Stack direction={'row'} justifyContent={'space-between'}>
+          <Typography sx={{ mb: 1.5 }}>Reward Amount</Typography>
+          <Typography>{pendingReward ? (formatEther(pendingReward)) : 0} Wonka</Typography>
         </Stack>
       </CardContent>
     </Card>
@@ -42,3 +47,4 @@ const UserStatus = ({ config }: Props) => {
 }
 
 export default UserStatus
+//  000 085 388 876 468 683
