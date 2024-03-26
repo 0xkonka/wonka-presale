@@ -59,7 +59,6 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
   }, [error])
 
   useEffect(() => {
-    console.log('isConfirmed', isConfirmed)
     const refreshData = async () => {
       await refresh()
       await refetch()

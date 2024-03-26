@@ -15,6 +15,7 @@ import LaunchpadAction from './components/LaunchpadAction'
 import Stastics from './components/Stastics'
 import UserStatus from './components/UserStatus'
 import PresaleTable from './components/PresaleTable'
+import StakedAmountInfo from './components/StakedAmountInfo'
 
 export type LaunchpadStatus = 'upcoming' | 'live' | 'ended' //'upcoming' | 'live' | 'filled' | 'ended' | 'claimable'
 
@@ -56,6 +57,7 @@ const Presale = () => {
   return (
     <Box>
       <Hero />
+      <StakedAmountInfo />
       <Stack direction='column' alignItems='center'>
         <Grid container spacing={10} maxWidth={1200}>
           <Grid item xs={12} md={7}>

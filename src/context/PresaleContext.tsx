@@ -3,12 +3,13 @@ import { Provider } from '@ethersproject/abstract-provider'
 import { Config, useAccount, useChainId, useClient, useReadContract, useWalletClient } from 'wagmi'
 import type { Account, Chain, Client, Transport } from 'viem'
 import { providers } from 'ethers'
-import { multicall, readContract, getBalance } from '@wagmi/core'
+import { multicall, readContract } from '@wagmi/core'
 import PRESALE_ABI from '@/abi/presale.json'
 import { PRESALE_ADDRESS } from '@/configs/address'
 import { wagmiConfig } from '@/pages/_app'
 import { PresaleConfig, UserInfo } from '@/types/presale'
 import { usePolling } from '@/hooks/use-polling'
+import { avalancheFuji, sepolia } from 'viem/chains'
 
 const POLLING_INTERVAL = 3000 * 1000 //default
 
@@ -19,6 +20,7 @@ type PresaleContextValue = {
   capAmount: bigint
   presaleLevel: number
   totalContributedAmount: bigint
+  totalContributedPerChain: { chainId: number; chainName: string; totalContributed: bigint }[]
   presaleStatus: number
   userInfo?: UserInfo
   refresh: () => Promise<any>
@@ -35,6 +37,10 @@ export const PresaleProvider: React.FC<PresaleProviderProps> = ({ children }) =>
   const { address: account } = useAccount()
   const chainId = useChainId()
 
+  const [totalContributedPerChain, setTotalContributedPerChain] = useState<
+  { chainId: number; chainName: string; totalContributed: bigint }[]
+  >([])
+
   const [config, setConfig] = useState<PresaleConfig>()
   const [presaleLevel, setPresaleLevel] = useState(0)
   const [totalContributed, setTotalContributed] = useState<bigint>(BigInt(0))
@@ -47,6 +53,51 @@ export const PresaleProvider: React.FC<PresaleProviderProps> = ({ children }) =>
     address: PRESALE_ADDRESS[chainId] as '0x{string}',
     abi: PRESALE_ABI as any
   } as const
+
+  // const { data: sepoliaStake } = useReadContract({
+  //   ...presaleContract,
+  //   functionName: 'totalContributed',
+  //   chainId: sepolia.id,
+  //   args: []
+  // })
+
+  // const { data: fujiStake } = useReadContract({
+  //   ...presaleContract,
+  //   functionName: 'totalContributed',
+  //   chainId: avalancheFuji.id,
+  //   args: []
+  // })
+
+  const fetchAllChainPresaleConfig = async () => {
+    const sepoliaStake = await readContract(wagmiConfig, {
+      address: PRESALE_ADDRESS[sepolia.id] as '0x{string}',
+      abi: PRESALE_ABI as any,
+      functionName: 'totalContributed',
+      chainId: sepolia.id,
+      args: []
+    })
+    const fujiStake = await readContract(wagmiConfig, {
+      address: PRESALE_ADDRESS[avalancheFuji.id] as '0x{string}',
+      abi: PRESALE_ABI as any,
+      functionName: 'totalContributed',
+      chainId: avalancheFuji.id,
+      args: []
+    })
+
+    setTotalContributedPerChain([
+      {
+        chainId: sepolia.id,
+        chainName: sepolia.name,
+        totalContributed: sepoliaStake as bigint
+      },
+      {
+        chainId: avalancheFuji.id,
+        chainName: avalancheFuji.name,
+        totalContributed: fujiStake as bigint
+      }
+    ])
+  }
+
   // Get Presale Config
   const fetchPresaleConfig = async () => {
     const result = await multicall(wagmiConfig, {
@@ -113,7 +164,6 @@ export const PresaleProvider: React.FC<PresaleProviderProps> = ({ children }) =>
   // Get User Info
   const fetchUserInfo = async () => {
     if (account) {
-
       const result = await multicall(wagmiConfig, {
         contracts: [
           {
@@ -125,15 +175,12 @@ export const PresaleProvider: React.FC<PresaleProviderProps> = ({ children }) =>
             ...presaleContract,
             functionName: 'pendingWonka',
             args: [account]
-          },
-
+          }
         ]
       })
 
-      const _userInfo = result[0].result as any;
-      const _pendingReward = result[1].result as bigint;
-
-      console.log('_pendingReward', result[1].result)
+      const _userInfo = result[0].result as any
+      const _pendingReward = result[1].result as bigint
 
       const userInfo: UserInfo = {
         contributedAmount: _userInfo[0] as bigint,
@@ -145,7 +192,7 @@ export const PresaleProvider: React.FC<PresaleProviderProps> = ({ children }) =>
       sertUserInfo(userInfo)
     }
   }
-  
+
   usePolling(fetchPresaleConfig, POLLING_INTERVAL, false, [chainId])
   usePolling(fetchUserInfo, POLLING_INTERVAL, false, [account, chainId])
 
@@ -153,6 +200,7 @@ export const PresaleProvider: React.FC<PresaleProviderProps> = ({ children }) =>
     <PresaleContext.Provider
       value={{
         account,
+        totalContributedPerChain,
         config,
         wonkaPrice,
         capAmount,
@@ -161,7 +209,7 @@ export const PresaleProvider: React.FC<PresaleProviderProps> = ({ children }) =>
         presaleStatus,
         userInfo,
         refresh: () => {
-          return Promise.all([fetchPresaleConfig(), fetchUserInfo()])
+          return Promise.all([fetchAllChainPresaleConfig(), fetchPresaleConfig(), fetchUserInfo()])
         }
       }}
     >
