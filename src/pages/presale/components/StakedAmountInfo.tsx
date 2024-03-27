@@ -10,6 +10,8 @@ const StakedAmountInfo = () => {
 
   const { totalContributedPerChain } = usePresale()
 
+  if (totalContributedPerChain.length === 0) return <div />
+
   return (
     <Stack direction='column' alignItems='center'>
       <Typography
@@ -24,8 +26,9 @@ const StakedAmountInfo = () => {
       >
         Staked Amount Per Chain
       </Typography>
-      {totalContributedPerChain.map(id => (
+      {totalContributedPerChain.map((id, index) => (
         <Typography
+          key={index}
           variant={isSmallScreen ? 'subtitle1' : 'h5'}
           color='#F3F3F3'
           sx={{
