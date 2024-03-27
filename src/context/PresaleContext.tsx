@@ -76,6 +76,8 @@ export const PresaleProvider: React.FC<PresaleProviderProps> = ({ children }) =>
       chainId: sepolia.id,
       args: []
     })
+
+    console.log('sepoliaStake', sepoliaStake)
     const fujiStake = await readContract(wagmiConfig, {
       address: PRESALE_ADDRESS[avalancheFuji.id] as '0x{string}',
       abi: PRESALE_ABI as any,
@@ -193,6 +195,7 @@ export const PresaleProvider: React.FC<PresaleProviderProps> = ({ children }) =>
     }
   }
 
+  usePolling(fetchAllChainPresaleConfig, POLLING_INTERVAL, false, [chainId])
   usePolling(fetchPresaleConfig, POLLING_INTERVAL, false, [chainId])
   usePolling(fetchUserInfo, POLLING_INTERVAL, false, [account, chainId])
 
