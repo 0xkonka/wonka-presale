@@ -7,7 +7,7 @@ import { multicall, readContract } from '@wagmi/core'
 import PRESALE_ABI from '@/abi/presale.json'
 import { PRESALE_ADDRESS } from '@/configs/address'
 import { wagmiConfig } from '@/pages/_app'
-import { PresaleConfig, UserInfo } from '@/types/presale'
+import { allPresaleInfo, PresaleConfig, UserInfo } from '@/types/presale'
 import { usePolling } from '@/hooks/use-polling'
 import { avalancheFuji, sepolia } from 'viem/chains'
 
@@ -20,7 +20,7 @@ type PresaleContextValue = {
   capAmount: bigint
   presaleLevel: number
   totalContributedAmount: bigint
-  totalContributedPerChain: { chainId: number; chainName: string; totalContributed: bigint }[]
+  totalContributedPerChain: allPresaleInfo[]
   presaleStatus: number
   userInfo?: UserInfo
   refresh: () => Promise<any>
@@ -37,9 +37,7 @@ export const PresaleProvider: React.FC<PresaleProviderProps> = ({ children }) =>
   const { address: account } = useAccount()
   const chainId = useChainId()
 
-  const [totalContributedPerChain, setTotalContributedPerChain] = useState<
-  { chainId: number; chainName: string; totalContributed: bigint }[]
-  >([])
+  const [totalContributedPerChain, setTotalContributedPerChain] = useState<allPresaleInfo[]>([])
 
   const [config, setConfig] = useState<PresaleConfig>()
   const [presaleLevel, setPresaleLevel] = useState(0)
@@ -69,35 +67,64 @@ export const PresaleProvider: React.FC<PresaleProviderProps> = ({ children }) =>
   // })
 
   const fetchAllChainPresaleConfig = async () => {
-    const sepoliaStake = await readContract(wagmiConfig, {
-      address: PRESALE_ADDRESS[sepolia.id] as '0x{string}',
-      abi: PRESALE_ABI as any,
-      functionName: 'totalContributed',
-      chainId: sepolia.id,
-      args: []
-    })
+    const chains = [sepolia.id, avalancheFuji.id]
+    const chainName = ['Sepolia', 'Fuji']
+    const _array: allPresaleInfo[] = []
 
-    console.log('sepoliaStake', sepoliaStake)
-    const fujiStake = await readContract(wagmiConfig, {
-      address: PRESALE_ADDRESS[avalancheFuji.id] as '0x{string}',
-      abi: PRESALE_ABI as any,
-      functionName: 'totalContributed',
-      chainId: avalancheFuji.id,
-      args: []
-    })
+    for (let i = 0; i < chains.length; i++) {
+      const poolInfo = await readContract(wagmiConfig, {
+        address: PRESALE_ADDRESS[chains[i]] as '0x{string}',
+        abi: PRESALE_ABI as any,
+        functionName: 'poolInfo',
+        chainId: chains[i],
+        args: []
+      })
 
-    setTotalContributedPerChain([
-      {
-        chainId: sepolia.id,
-        chainName: sepolia.name,
-        totalContributed: sepoliaStake as bigint
-      },
-      {
-        chainId: avalancheFuji.id,
-        chainName: avalancheFuji.name,
-        totalContributed: fujiStake as bigint
-      }
-    ])
+      const presaleLevel = (poolInfo as any[])[0]
+
+      const totalContributed = await readContract(wagmiConfig, {
+        address: PRESALE_ADDRESS[chains[i]] as '0x{string}',
+        abi: PRESALE_ABI as any,
+        functionName: 'totalContributed',
+        chainId: chains[i],
+        args: []
+      })
+
+      const presaleConfig = await readContract(wagmiConfig, {
+        address: PRESALE_ADDRESS[chains[i]] as '0x{string}',
+        abi: PRESALE_ABI as any,
+        functionName: 'presaleConfig',
+        chainId: chains[i],
+        args: []
+      })
+
+      const capPerLevel = await readContract(wagmiConfig, {
+        address: PRESALE_ADDRESS[chains[i]] as '0x{string}',
+        abi: PRESALE_ABI as any,
+        functionName: 'capPerLevel',
+        chainId: chains[i],
+        args: [presaleLevel]
+      })
+
+      const contributedPerLevel = await readContract(wagmiConfig, {
+        address: PRESALE_ADDRESS[chains[i]] as '0x{string}',
+        abi: PRESALE_ABI as any,
+        functionName: 'contributedPerLevel',
+        chainId: chains[i],
+        args: [presaleLevel]
+      })
+
+      _array.push({
+        chainId: chains[i],
+        chainName: chainName[i],
+        totalContributed: totalContributed as bigint,
+        hardCap: (presaleConfig as any[])[5] as bigint,
+        capPerLevel: capPerLevel as bigint,
+        contributedPerLevel: contributedPerLevel as bigint,
+      })
+    }
+
+    setTotalContributedPerChain(_array)
   }
 
   // Get Presale Config
@@ -111,7 +138,7 @@ export const PresaleProvider: React.FC<PresaleProviderProps> = ({ children }) =>
         },
         {
           ...presaleContract,
-          functionName: 'presaleLevel',
+          functionName: 'poolInfo',
           args: []
         },
         {
@@ -150,7 +177,7 @@ export const PresaleProvider: React.FC<PresaleProviderProps> = ({ children }) =>
     }
     setConfig(_config)
 
-    const _presaleLevel = Number(result[1].result)
+    const _presaleLevel = Number((result[1].result as any[])[0])
     setPresaleLevel(_presaleLevel)
     const _totalContributed = result[2].result as bigint
     setTotalContributed(_totalContributed)

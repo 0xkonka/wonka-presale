@@ -21,3 +21,12 @@ export enum FunderStatus {
     Invested,
     Claimed
 }
+
+export type allPresaleInfo = {
+    chainId: number
+    chainName: string
+    totalContributed: bigint
+    hardCap: bigint
+    capPerLevel: bigint
+    contributedPerLevel: bigint
+}

@@ -43,7 +43,7 @@ const FooterContent = () => {
   return (
     <Box>
       <Box sx={{ display: {xs: 'none', sm: 'flex'}, flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', mb: 7.5 }}>
-        <Box sx={{display: 'flex'}}>
+        {/* <Box sx={{display: 'flex'}}>
           <Typography variant='subtitle1' component={LinkStyled}  target='_blank' href='https://policy.com'>
             Privacy Policy
           </Typography>
@@ -51,27 +51,27 @@ const FooterContent = () => {
           <Typography variant='subtitle1' component={LinkStyled}  target='_blank' href='https://terms.com'>
             Terms of Use
           </Typography>
-        </Box>
+        </Box> */}
         <Box sx={{display: 'flex', flexWrap: 'wrap'}}>
-          <Typography variant='subtitle1' component={LinkStyled}  target='_blank' href='https://discord.com'>
+          <Typography variant='subtitle1' component={LinkStyled}  target='_blank' href='https://discord.gg/tqbPTrvwpn'>
             Discord
           </Typography>
           <Typography variant='subtitle1' sx={{px: 4}}>/</Typography>
-          <Typography variant='subtitle1' component={LinkStyled}  target='_blank' href='https://twitter.com'>
+          <Typography variant='subtitle1' component={LinkStyled}  target='_blank' href='https://twitter.com/WonkasMeme'>
             Twitter
           </Typography>
-          <Typography variant='subtitle1' sx={{px: 4}}>/</Typography>
+          {/* <Typography variant='subtitle1' sx={{px: 4}}>/</Typography>
           <Typography variant='subtitle1' component={LinkStyled}  target='_blank' href='https://instagram.com'>
             Instagram
-          </Typography>
+          </Typography> */}
           <Typography variant='subtitle1' sx={{px: 4}}>/</Typography>
-          <Typography variant='subtitle1' component={LinkStyled}  target='_blank' href='https://telegram.com'>
+          <Typography variant='subtitle1' component={LinkStyled}  target='_blank' href='https://t.me/Wonkas_Portal'>
             Telegram
           </Typography>
-          <Typography variant='subtitle1' sx={{px: 4}}>/</Typography>
+          {/* <Typography variant='subtitle1' sx={{px: 4}}>/</Typography>
           <Typography variant='subtitle1' component={LinkStyled}  target='_blank' href='https://linkedin.com'>
             Linkedin
-          </Typography>
+          </Typography> */}
         </Box>
       </Box>
       <Stack sx={{ display: {xs: 'flex', 'sm': 'none'}}}>
