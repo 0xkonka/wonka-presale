@@ -32,9 +32,8 @@ const StakedAmountInfo = () => {
         </Typography>
 
         {totalContributedPerChain.map((id, index) => (
-          <>
+          <Box key={index}>
             <Typography
-              key={index}
               variant={isSmallScreen ? 'subtitle1' : 'h5'}
               color='#F3F3F3'
               sx={{
@@ -71,7 +70,7 @@ const StakedAmountInfo = () => {
                 { value: +formatUnits(id.capPerLevel, 6), label: `$${+formatUnits(id.capPerLevel, 6)}` }
               ]}
             />
-          </>
+          </Box>
         ))}
       </Stack>
     </Card>
