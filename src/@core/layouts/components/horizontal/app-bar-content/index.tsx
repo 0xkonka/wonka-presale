@@ -63,16 +63,16 @@ const AppBarContent = (props: Props) => {
         userAppBarBranding(props)
       ) : (
         <LinkStyled href='/'>
-          <Typography variant = "h2">WONKA</Typography>
-          {/* <Image src='/images/logos/logo.svg' alt='Wonka Logo' sizes="100vw"
-            width={207}
-            height={24}
+          {/* <Typography variant = "h2">WONKA</Typography> */}
+          <Image src='/images/favicon.png' alt='Wonka Logo' sizes="100vw"
+            width={80}
+            height={12}
             style={{
-              width: '100%',
+              // width: '100%',
               height: 'auto',
               minHeight: 32
             }}
-            priority /> */}
+            priority />
         </LinkStyled>
       )}
       {navHidden ? null : (

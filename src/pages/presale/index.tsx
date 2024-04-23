@@ -16,6 +16,7 @@ import Stastics from './components/Stastics'
 import UserStatus from './components/UserStatus'
 import PresaleTable from './components/PresaleTable'
 import StakedAmountInfo from './components/StakedAmountInfo'
+import { hexToRGBA } from '@/@core/utils/hex-to-rgba'
 
 export type LaunchpadStatus = 'upcoming' | 'live' | 'ended' //'upcoming' | 'live' | 'filled' | 'ended' | 'claimable'
 
@@ -57,14 +58,17 @@ const Presale = () => {
   return (
     <Box>
       <Hero />
-      <StakedAmountInfo />
+
       <Stack direction='column' alignItems='center'>
         <Grid container spacing={10} maxWidth={1200}>
+          <Grid item xs={12} md={12} sx={{ display: 'flex', justifyContent: 'center' }}>
+            <StakedAmountInfo />
+          </Grid>
           <Grid item xs={12} md={7}>
             <Stastics config={config} />
           </Grid>
           <Grid item xs={12} md={5}>
-            <Card sx={{ minWidth: 275, background: '#343e52', marginBottom: 8 }}>
+            <Card sx={{ minWidth: 275, background: hexToRGBA('#343e52', 0.9), marginBottom: 8 }}>
               <CardContent>
                 <Stack direction={'column'} gap={2}>
                   <LaunchpadTime presaleState={presaleState} />
@@ -102,7 +106,7 @@ const Presale = () => {
                     <Typography variant='subtitle2'>{formatUnits(config.hardcap, 6)}$</Typography>
                   </Stack>
 
-                  {account && <LaunchpadAction  config={config} presaleState={presaleState} />}
+                  {account && <LaunchpadAction config={config} presaleState={presaleState} />}
                 </Stack>
               </CardContent>
             </Card>

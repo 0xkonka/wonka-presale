@@ -6,6 +6,7 @@ import { formatUnits } from 'ethers/lib/utils'
 import { Box, Card, CardContent, Grid, Slider, Stack } from '@mui/material'
 import { useAccount } from 'wagmi'
 import { PresaleConfig } from '@/types/presale'
+import { hexToRGBA } from '@/@core/utils/hex-to-rgba'
 
 function formatDateTime(timestamp: number) {
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -35,7 +36,7 @@ const Stastics: React.FC<Props> = ({ config }) => {
   if (!config) return <></>
 
   return (
-    <Card sx={{ minWidth: 275, background: '#343e52' }}>
+    <Card sx={{ minWidth: 275, background: hexToRGBA('#343e52', 0.9) }}>
       <CardContent>
         <Typography variant='h3' component='div'>
           WONKA

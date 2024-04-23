@@ -5,6 +5,7 @@ import { usePresale } from '@/context/PresaleContext'
 import { Card, CardContent, Grid, Slider, Stack } from '@mui/material'
 import { formatEther, formatUnits } from 'viem'
 import { PresaleConfig } from '@/types/presale'
+import { hexToRGBA } from '@/@core/utils/hex-to-rgba'
 
 interface Props {
   config: PresaleConfig
@@ -16,7 +17,7 @@ const UserStatus = ({ config }: Props) => {
   const { contributedAmount, claimableAmount, pendingReward, status } = userInfo || {}
 
   return (
-    <Card sx={{ minWidth: 275, background: '#343e52' }}>
+    <Card sx={{ minWidth: 275, background: hexToRGBA('#343e52', 0.9) }}>
       <CardContent>
         <Typography variant='h5' component='div'>
           User Status
