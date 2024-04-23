@@ -32,14 +32,12 @@ const StakedAmountInfo = () => {
         </Typography>
 
         {totalContributedPerChain.map((id, index) => (
-          <Box key={index}>
+          <Stack key={index} direction='column' alignItems='center'>
             <Typography
-              variant={isSmallScreen ? 'subtitle1' : 'h5'}
-              color='#F3F3F3'
+              variant={isSmallScreen ? 'subtitle1' : 'h4'}
+              color='#c5ae28'
               sx={{
                 mb: { xs: 2, md: 4 },
-                width: 730,
-                maxWidth: '100%'
               }}
             >
               {id.chainName}
@@ -70,7 +68,7 @@ const StakedAmountInfo = () => {
                 { value: +formatUnits(id.capPerLevel, 6), label: `$${+formatUnits(id.capPerLevel, 6)}` }
               ]}
             />
-          </Box>
+          </Stack>
         ))}
       </Stack>
     </Card>
