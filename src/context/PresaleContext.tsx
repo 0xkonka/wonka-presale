@@ -72,7 +72,7 @@ export const PresaleProvider: React.FC<PresaleProviderProps> = ({ children }) =>
     const _array: allPresaleInfo[] = []
 
     for (let i = 0; i < chains.length; i++) {
-      const poolInfo = await readContract(wagmiConfig, {
+      const poolInfo = await readContract(wagmiConfig as any, {
         address: PRESALE_ADDRESS[chains[i]] as '0x{string}',
         abi: PRESALE_ABI as any,
         functionName: 'poolInfo',
@@ -82,7 +82,7 @@ export const PresaleProvider: React.FC<PresaleProviderProps> = ({ children }) =>
 
       const presaleLevel = (poolInfo as any[])[0]
 
-      const totalContributed = await readContract(wagmiConfig, {
+      const totalContributed = await readContract(wagmiConfig as any, {
         address: PRESALE_ADDRESS[chains[i]] as '0x{string}',
         abi: PRESALE_ABI as any,
         functionName: 'totalContributed',
@@ -90,7 +90,7 @@ export const PresaleProvider: React.FC<PresaleProviderProps> = ({ children }) =>
         args: []
       })
 
-      const presaleConfig = await readContract(wagmiConfig, {
+      const presaleConfig = await readContract(wagmiConfig as any, {
         address: PRESALE_ADDRESS[chains[i]] as '0x{string}',
         abi: PRESALE_ABI as any,
         functionName: 'presaleConfig',
@@ -98,7 +98,7 @@ export const PresaleProvider: React.FC<PresaleProviderProps> = ({ children }) =>
         args: []
       })
 
-      const capPerLevel = await readContract(wagmiConfig, {
+      const capPerLevel = await readContract(wagmiConfig as any, {
         address: PRESALE_ADDRESS[chains[i]] as '0x{string}',
         abi: PRESALE_ABI as any,
         functionName: 'capPerLevel',
@@ -106,7 +106,7 @@ export const PresaleProvider: React.FC<PresaleProviderProps> = ({ children }) =>
         args: [presaleLevel]
       })
 
-      const contributedPerLevel = await readContract(wagmiConfig, {
+      const contributedPerLevel = await readContract(wagmiConfig as any, {
         address: PRESALE_ADDRESS[chains[i]] as '0x{string}',
         abi: PRESALE_ABI as any,
         functionName: 'contributedPerLevel',
@@ -129,7 +129,7 @@ export const PresaleProvider: React.FC<PresaleProviderProps> = ({ children }) =>
 
   // Get Presale Config
   const fetchPresaleConfig = async () => {
-    const result = await multicall(wagmiConfig, {
+    const result = await multicall(wagmiConfig as any, {
       contracts: [
         {
           ...presaleContract,
@@ -193,7 +193,7 @@ export const PresaleProvider: React.FC<PresaleProviderProps> = ({ children }) =>
   // Get User Info
   const fetchUserInfo = async () => {
     if (account) {
-      const result = await multicall(wagmiConfig, {
+      const result = await multicall(wagmiConfig as any, {
         contracts: [
           {
             ...presaleContract,
