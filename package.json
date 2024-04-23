@@ -51,6 +51,8 @@
     "i18next-http-backend": "2.2.0",
     "jsonwebtoken": "8.5.1",
     "keen-slider": "6.8.5",
+    "@lifi/sdk": "^3.0.0-alpha.58",
+    "@lifi/widget": "^3.0.0-alpha.37",
     "next": "13.3.2",
     "nprogress": "0.2.0",
     "payment": "2.4.6",
