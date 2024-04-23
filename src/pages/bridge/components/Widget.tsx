@@ -8,14 +8,14 @@ export function Widget() {
     <main>
       {mounted && (
         <LiFiWidget
-        //   config={{
-        //     theme: {
-        //       container: {
-        //         boxShadow: '0px 8px 32px rgba(0, 0, 0, 0.08)',
-        //         borderRadius: '16px',
-        //       },
-        //     },
-        //   }}
+          config={{
+            theme: {
+              container: {
+                boxShadow: '0px 8px 32px rgba(0, 0, 0, 0.08)',
+                borderRadius: '16px',
+              },
+            },
+          }}
           integrator="wonka-bridge"
         />
       )}
