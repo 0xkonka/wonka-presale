@@ -9,7 +9,7 @@ module.exports = {
   trailingSlash: true,
   reactStrictMode: false,
   // swcMinify: true,
-  // transpilePackages: ['@lifi/widget', '@lifi/wallet-management'],
+  transpilePackages: ['@lifi/widget', '@lifi/wallet-management'],
   webpack: config => {
     config.resolve.fallback = { fs: false, net: false, tls: false };
     config.externals.push('pino-pretty', 'lokijs', 'encoding');
