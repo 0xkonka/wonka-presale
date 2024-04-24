@@ -11,7 +11,7 @@ const navigation = (): HorizontalNavItemsType => {
     {
       title: 'Bridge',
       icon: 'bridge',
-      path: 'https://jumper-exchange-git-ui-wonka-grapefi-s-team.vercel.app/',
+      path: 'https://bridge.chocolatefactory.gg',
       externalLink: true,
       openInNewTab: true
     }
