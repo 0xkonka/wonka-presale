@@ -11,7 +11,7 @@ const navigation = (): HorizontalNavItemsType => {
     {
       title: 'Bridge',
       icon: 'bridge',
-      path: 'https://vinium-bridge.vercel.app/',
+      path: 'https://jumper-exchange-git-ui-wonka-grapefi-s-team.vercel.app/',
       externalLink: true,
       openInNewTab: true
     }
