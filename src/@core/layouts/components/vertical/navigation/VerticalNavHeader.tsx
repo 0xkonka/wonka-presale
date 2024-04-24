@@ -28,7 +28,7 @@ interface Props {
   navMenuBranding?: LayoutProps['verticalLayoutProps']['navMenu']['branding']
   menuLockedIcon?: LayoutProps['verticalLayoutProps']['navMenu']['lockedIcon']
   menuUnlockedIcon?: LayoutProps['verticalLayoutProps']['navMenu']['unlockedIcon']
-  }
+}
 
 // ** Styled Components
 const MenuHeaderWrapper = styled(Box)<BoxProps>(({ theme }) => ({
@@ -50,7 +50,7 @@ const HeaderTitle = styled(Typography)<TypographyProps>({
 const LinkStyled = styled(Link)({
   display: 'flex',
   alignItems: 'center',
-  textDecoration: 'none',
+  textDecoration: 'none'
 })
 
 const VerticalNavHeader = (props: Props) => {
@@ -92,18 +92,23 @@ const VerticalNavHeader = (props: Props) => {
         userNavMenuBranding(props)
       ) : (
         <LinkStyled href='/'>
-          <Typography variant='h2'>WONKA</Typography>
-          {/* <Image src='/images/logos/logo.svg' alt='Wonka Logo' sizes="100vw"
-            width={207}
-            height={24}
+          <Image
+            src='/images/favicon.png'
+            alt='Wonka Logo'
+            sizes='100vw'
+            width={60}
+            height={12}
             style={{
-              width: '100%',
-              height: 18,
+              // width: '100%',
+              marginTop: '10px',
+              height: 'auto',
+              minHeight: 32
             }}
-            priority /> */}
+            priority
+          />
         </LinkStyled>
       )}
-      <Icon icon='carbon:close' fontSize={42} onClick={toggleNavVisibility}/>
+      <Icon icon='carbon:close' fontSize={42} onClick={toggleNavVisibility} />
     </MenuHeaderWrapper>
   )
 }

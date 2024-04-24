@@ -5,7 +5,7 @@ import { MouseEvent, useState } from 'react'
 import { styled, Theme } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
-import Button, {ButtonProps} from '@mui/material/Button'
+import Button, { ButtonProps } from '@mui/material/Button'
 import { ListItemIcon, ListItemText, Typography } from '@mui/material'
 import Link from '@mui/material/Link'
 import MuiMenu, { MenuProps } from '@mui/material/Menu'
@@ -56,7 +56,7 @@ const MenuItem = styled(MuiMenuItem)<MenuItemProps>(({ theme }) => ({
 const LinkStyled = styled(Link)({
   display: 'flex',
   alignItems: 'center',
-  textDecoration: 'none',
+  textDecoration: 'none'
 })
 
 const AppBarContent = (props: Props) => {
@@ -67,16 +67,20 @@ const AppBarContent = (props: Props) => {
     <Box sx={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
       <Box className='actions-left' sx={{ mr: 2, display: 'flex', alignItems: 'center' }}>
         <LinkStyled href='/'>
-          <Typography variant='h2'>WONKA</Typography>
-          {/* <Image src='/images/logos/logo.svg' alt='Wonka Logo' sizes="100vw"
-            width={207}
-            height={24}
+          <Image
+            src='/images/favicon.png'
+            alt='Wonka Logo'
+            sizes='100vw'
+            width={60}
+            height={12}
             style={{
-              width: '100%',
-              height: 18,
+              // width: '100%',
+              height: 'auto',
+              minHeight: 32
             }}
-            priority /> */}
-         </LinkStyled>
+            priority
+          />
+        </LinkStyled>
       </Box>
       <Box className='actions-right' sx={{ display: 'flex', alignItems: 'center' }}>
         {hidden && !settings.navHidden ? (

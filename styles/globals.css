@@ -2,9 +2,9 @@ html,
 body {
   min-height: 100%;
   /* background: linear-gradient(180deg, #172726 -41.9%, #0b0d0e 50%); */
-  background-image: url('../public/images/bg.jpg');
-  /* background-size: cover; */
-  background-size: 100% 100%;
+  background-image: url('../public/images/sale2.jpg');
+  background-size: cover;
+
   background-repeat: no-repeat;
   background-position: center;
   font-family: 'Work Sans', sans-serif;
@@ -20,7 +20,7 @@ body::-webkit-scrollbar-track {
   background: transparent;
 }
 body::-webkit-scrollbar-thumb {
-  background-color: #67dab1;
+  background-color: #750c6d;
   border-radius: 20px;
 }
 

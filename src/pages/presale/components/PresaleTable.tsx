@@ -14,7 +14,7 @@ import { PresaleConfig } from '@/types/presale'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: '#330246d4',
     color: theme.palette.common.white
   },
   [`&.${tableCellClasses.body}`]: {
@@ -24,11 +24,11 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
-    backgroundColor: '#343e52'
+    backgroundColor: '#330246d4'
   },
 
   '&:nth-of-type(even)': {
-    backgroundColor: '#233e52'
+    backgroundColor: '#3302467d'
   },
   // hide last border
   '&:last-child td, &:last-child th': {
@@ -82,12 +82,12 @@ const PresaleTable: React.FC<Props> = ({ config }) => {
   }, [wonkaPrice, capAmount])
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} sx={{ borderRadius: '20px', backgroundColor: '#330246d4 !important' }}>
       <Table sx={{ minWidth: 700 }} aria-label='customized table'>
         <TableHead>
           <TableRow>
-            <StyledTableCell>Presale Level</StyledTableCell>
-            <StyledTableCell align='right'>Wonka Price ($)</StyledTableCell>
+            <StyledTableCell>Auction Level</StyledTableCell>
+            <StyledTableCell align='right'>WONKA Price ($)</StyledTableCell>
             <StyledTableCell align='right'>Cap / Chain</StyledTableCell>
             <StyledTableCell align='right'>Total Auctioned</StyledTableCell>
             <StyledTableCell align='right'>% Supply Total</StyledTableCell>

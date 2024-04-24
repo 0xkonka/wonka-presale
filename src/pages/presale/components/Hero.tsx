@@ -20,19 +20,26 @@ const Hero = () => {
           mt: 8,
           fontSize: { xs: 36, md: 64, xl: 72 },
           fontWeight: 400,
-          fontFamily: `'Britanica-HeavySemiExpanded', sans-serif`
+          fontFamily: `'Britanica-HeavySemiExpanded', sans-serif`,
+          color: '#c4a72a !important'
         }}
-        style={textStyle}
       >
-        STAKE, PLAY & GET REWARDS
+        The Chocolate Factory
       </Typography>
       <Typography
         variant={isSmallScreen ? 'subtitle1' : 'h5'}
-        color='#F3F3F3'
-        sx={{ mb: { xs: 8, md: 16 }, fontWeight: 300, width: 730, maxWidth: '100%', lineHeight: { xs: 1.25, sm: 1.7 } }}
+        color='#fff'
+        sx={{
+          mb: { xs: 8, md: 16 },
+          fontWeight: 300,
+          width: 730,
+          maxWidth: '100%',
+          textAlign: 'center',
+          lineHeight: { xs: 1.25, sm: 1.7 }
+        }}
       >
-        WONKA is an innovative new gaming platform designed for gaming enthusiasts. From active betting to passive
-        staking, there are rewards for all users.
+        The First & Sweetest Automated Omni-chain Memecoin Raffle Powered by Layer Zero & Wormhole! Join in the cross
+        chain gamified auction below to nab the best price for $WONKA
       </Typography>
     </Stack>
   )

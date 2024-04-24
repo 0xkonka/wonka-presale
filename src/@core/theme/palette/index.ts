@@ -107,7 +107,7 @@ const DefaultPalette = (mode: Palette['mode'], skin: Skin): Palette => {
       disabled: `rgba(${mainColor}, 0.26)`,
       disabledBackground: `rgba(${mainColor}, 0.12)`,
       focus: `rgba(${mainColor}, 0.12)`
-    },
+    }
   } as Palette
 }
 

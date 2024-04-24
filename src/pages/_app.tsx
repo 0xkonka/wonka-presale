@@ -113,8 +113,8 @@ const App = (props: ExtendedAppProps) => {
     <CacheProvider value={emotionCache}>
       <Head>
         <title>{`${themeConfig.templateName}`}</title>
-        <meta name='description' content={`${themeConfig.templateName} – WONKA – `} />
-        <meta name='keywords' content='DeFi, WONKA' />
+        <meta name='description' content={`The Chocolate Factory Auction`} />
+        <meta name='keywords' content='DeFi, Chocolate Factory' />
         <meta name='viewport' content='initial-scale=1, width=device-width' />
       </Head>
       <Web3Provider>

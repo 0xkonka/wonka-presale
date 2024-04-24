@@ -61,14 +61,11 @@ const Presale = () => {
 
       <Stack direction='column' alignItems='center'>
         <Grid container spacing={10} maxWidth={1200}>
-          <Grid item xs={12} md={12} sx={{ display: 'flex', justifyContent: 'center' }}>
-            <StakedAmountInfo />
-          </Grid>
           <Grid item xs={12} md={7}>
             <Stastics config={config} />
           </Grid>
           <Grid item xs={12} md={5}>
-            <Card sx={{ minWidth: 275, background: hexToRGBA('#343e52', 0.9), marginBottom: 8 }}>
+            <Card sx={{ minWidth: 275, background: '#330246d4', borderRadius: '20px', marginBottom: 8 }}>
               <CardContent>
                 <Stack direction={'column'} gap={2}>
                   <LaunchpadTime presaleState={presaleState} />
@@ -97,13 +94,13 @@ const Presale = () => {
                         height: 12,
                         mb: 2,
                         borderRadius: 8,
-                        background: 'linear-gradient(90deg, #00D084 0%, #0004ff 100.77%)'
+                        background: 'linear-gradient(90deg, #e2e49e 0%, #d0cb00 100.77%)'
                       }}
                     />
                   </Box>
                   <Stack direction='row' sx={{ justifyContent: 'space-between' }}>
-                    <Typography variant='subtitle2'>{formatUnits(totalContributedAmount, 6)}$</Typography>
-                    <Typography variant='subtitle2'>{formatUnits(config.hardcap, 6)}$</Typography>
+                    <Typography variant='subtitle2'>${formatUnits(totalContributedAmount, 6)}</Typography>
+                    <Typography variant='subtitle2'>${formatUnits(config.hardcap, 6)}</Typography>
                   </Stack>
 
                   {account && <LaunchpadAction config={config} presaleState={presaleState} />}
@@ -111,6 +108,10 @@ const Presale = () => {
               </CardContent>
             </Card>
             <UserStatus config={config} />
+          </Grid>
+
+          <Grid item xs={12} md={12} sx={{ display: 'flex', justifyContent: 'center' }}>
+            <StakedAmountInfo />
           </Grid>
           <Grid item xs={12} md={12}>
             <PresaleTable config={config} />

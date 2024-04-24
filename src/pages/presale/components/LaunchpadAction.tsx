@@ -90,6 +90,7 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
               endAdornment: (
                 <InputAdornment position='end'>
                   <Button
+                    sx={{ color: '#b79e30' }}
                     onClick={() =>
                       setContributeAmount(
                         (usdcBalance! ?? 0) < maxPerUser ? formatUnits(usdcBalance!, 6) : formatUnits(maxPerUser, 6)
@@ -111,16 +112,17 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
           {(allowance ? +formatUnits(allowance, 6) : 0) >= +contributeAmount ? (
             <Button
               variant='contained'
-              color='success'
+              color='primary'
               onClick={() => onContribute(contributeAmount)}
               disabled={isPending || isConfirming}
+              sx={{ background: '#b79e30' }}
             >
-              Contribute
+              Ape Now
             </Button>
           ) : (
             <Button
               variant='contained'
-              color='success'
+              color='primary'
               onClick={() => onApprove(contributeAmount)}
               disabled={isPending || isConfirming}
             >
@@ -153,7 +155,7 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
   return (
     <>
       <Stack direction={'row'} justifyContent={'space-between'}>
-        <Typography>Presale is finished</Typography>
+        <Typography>Auction is finished</Typography>
         <Button variant='contained' color='success' onClick={() => onClaim()} disabled={isPending || isConfirming}>
           Claim
         </Button>

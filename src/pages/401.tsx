@@ -49,7 +49,6 @@ const Error401 = () => {
             Back to Home
           </Button>
         </BoxWrapper>
-        <Img height='500' alt='error-illustration' src='/images/pages/401.png' />
       </Box>
     </Box>
   )

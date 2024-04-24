@@ -36,15 +36,19 @@ const Stastics: React.FC<Props> = ({ config }) => {
   if (!config) return <></>
 
   return (
-    <Card sx={{ minWidth: 275, background: hexToRGBA('#343e52', 0.9) }}>
+    <Card sx={{ minWidth: 275, background: '#330246d4', borderRadius: '20px' }}>
       <CardContent>
-        <Typography variant='h3' component='div'>
-          WONKA
+        <Typography
+          variant='h3'
+          component='div'
+          sx={{ fontFamily: `'Britanica-HeavySemiExpanded', sans-serif`, color: '#c4a72a' }}
+        >
+          The Chocolate Factory Auction
         </Typography>
         <Divider />
         <Typography sx={{ fontSize: 16 }} color='text.primary' gutterBottom>
-          WONKA is an innovative new gaming platform designed for gaming enthusiasts. From active betting to passive
-          staking, there are rewards for all users.
+          $WONKA is the powerhouse of the Chocolate Factory's ecosystem with inbuilt deflationary flywheel tokenomics
+          giving holders a direct share of the protocols growth through staking revenue & bonuses.
         </Typography>
         <Divider />
         <Stack direction={'row'} justifyContent={'space-between'}>
@@ -59,32 +63,32 @@ const Stastics: React.FC<Props> = ({ config }) => {
         <Divider />
         <Stack direction={'row'} justifyContent={'space-between'}>
           <Typography sx={{ mb: 1.5 }}>Softcap</Typography>
-          <Typography>{formatUnits(config.softcap, 6)} $</Typography>
+          <Typography>${formatUnits(config.softcap, 6)}</Typography>
         </Stack>
         <Divider />
         <Stack direction={'row'} justifyContent={'space-between'}>
           <Typography sx={{ mb: 1.5 }}>Hardcap</Typography>
-          <Typography>{formatUnits(config.hardcap, 6)}$</Typography>
+          <Typography>${formatUnits(config.hardcap, 6)}</Typography>
         </Stack>
         <Divider />
         <Stack direction={'row'} justifyContent={'space-between'}>
           <Typography sx={{ mb: 1.5 }}>Min Buy</Typography>
-          <Typography>{formatUnits(config.minContribution, 6)}$</Typography>
+          <Typography>${formatUnits(config.minContribution, 6)}</Typography>
         </Stack>
         <Divider />
         <Stack direction={'row'} justifyContent={'space-between'}>
           <Typography sx={{ mb: 1.5 }}>Max Buy</Typography>
-          <Typography>{formatUnits(config.maxContribution, 6)}$</Typography>
+          <Typography>${formatUnits(config.maxContribution, 6)}</Typography>
         </Stack>
         <Divider />
         <Stack direction={'row'} justifyContent={'space-between'}>
           <Typography sx={{ mb: 1.5 }}>Total raised(% of target )</Typography>
-          <Typography>{formatUnits(totalContributedAmount, 6)}$</Typography>
+          <Typography>${formatUnits(totalContributedAmount, 6)}</Typography>
         </Stack>
         <Divider />
         <Stack direction={'row'} justifyContent={'space-between'}>
           <Typography sx={{ mb: 1.5 }}>Presale Level</Typography>
-          <Typography>{presaleLevel + 1}</Typography>
+          <Typography>{presaleLevel + 1}/8</Typography>
         </Stack>
         <Divider />
       </CardContent>

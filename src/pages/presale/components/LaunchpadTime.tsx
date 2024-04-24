@@ -10,8 +10,8 @@ export interface LaunchpadTimeProps {
 }
 
 const TimerSpan = styled(Typography)<TypographyProps>(({ theme }) => ({
-  backgroundColor: theme.palette.background.default,
-  color: '#fff',
+  backgroundColor: '#fff',
+  color: '#000',
   fontSize: 20,
   borderRadius: 4,
   padding: 5,
@@ -27,15 +27,19 @@ const LaunchpadTime: React.FC<LaunchpadTimeProps> = ({ presaleState }: Launchpad
   if (status === 'ended') {
     return (
       <Stack>
-        <Typography>Presale was ended</Typography>
+        <Typography>Auction has ended</Typography>
       </Stack>
     )
   }
 
   return (
     <Stack alignItems={'center'}>
-      <Typography variant='h5' marginBottom={3}>
-        {status === 'upcoming' ? '  Presale Starts in' : '  Presale Ends in'}
+      <Typography
+        variant='h5'
+        marginBottom={3}
+        sx={{ fontFamily: `'Britanica-HeavySemiExpanded', sans-serif`, color: '#c4a72a' }}
+      >
+        {status === 'upcoming' ? '  Auction Starts in' : '  Auction Ends in'}
       </Typography>
       <Stack direction={'row'} alignItems={'center'}>
         {timeUntil.months > 0 ? (
