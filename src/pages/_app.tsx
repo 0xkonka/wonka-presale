@@ -31,7 +31,7 @@ import {
 import { Chain } from '@rainbow-me/rainbowkit'
 
 import { http, createConfig, WagmiProvider } from 'wagmi'
-import { mainnet, goerli, sepolia, avalancheFuji } from 'wagmi/chains'
+import { mainnet, goerli, sepolia, avalancheFuji, base, avalanche, bsc, arbitrum } from 'wagmi/chains'
 
 // ** Loader Import
 import NProgress from 'nprogress'
@@ -76,6 +76,7 @@ import '../../styles/globals.css'
 import '@rainbow-me/rainbowkit/styles.css'
 import { GlobalProvider } from '@/context/GlobalContext'
 import { PresaleProvider } from '@/context/PresaleContext'
+import { main } from '@popperjs/core'
 
 // ** Extend App Props with Emotion
 type ExtendedAppProps = AppProps & {
@@ -155,10 +156,13 @@ export const wagmiConfig = getDefaultConfig({
       wallets: [argentWallet, trustWallet, ledgerWallet]
     }
   ],
-  chains: [sepolia, avalancheFuji],
+  chains: [arbitrum, base, mainnet, avalanche, bsc],
   transports: {
-    [sepolia.id]: http('https://rpc-sepolia.rockx.com'),
-    [avalancheFuji.id]: http('https://api.avax-test.network/ext/bc/C/rpc')
+    [arbitrum.id]: http('https://arbitrum.llamarpc.com'),
+    [base.id]: http('https://base.llamarpc.com'),
+    [mainnet.id]: http('https://eth.llamarpc.com'),
+    [avalanche.id]: http('https://avalanche.drpc.org'),
+    [bsc.id]: http('https://binance.llamarpc.com')
   }
   // ssr: true
 })

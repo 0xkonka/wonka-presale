@@ -9,7 +9,7 @@ import { PRESALE_ADDRESS } from '@/configs/address'
 import { wagmiConfig } from '@/pages/_app'
 import { allPresaleInfo, PresaleConfig, UserInfo } from '@/types/presale'
 import { usePolling } from '@/hooks/use-polling'
-import { avalancheFuji, sepolia } from 'viem/chains'
+import { avalancheFuji, mainnet, sepolia, avalanche, base, arbitrum, bsc } from 'viem/chains'
 
 const POLLING_INTERVAL = 3000 * 1000 //default
 
@@ -67,8 +67,8 @@ export const PresaleProvider: React.FC<PresaleProviderProps> = ({ children }) =>
   // })
 
   const fetchAllChainPresaleConfig = async () => {
-    const chains = [sepolia.id, avalancheFuji.id]
-    const chainName = ['Sepolia', 'Fuji']
+    const chains = [mainnet.id, avalanche.id, base.id, bsc.id, arbitrum.id]
+    const chainName = ['Ethereum', 'Avalanche', 'Base', 'BSC', 'Arbitrum']
     const _array: allPresaleInfo[] = []
 
     for (let i = 0; i < chains.length; i++) {
@@ -120,7 +120,7 @@ export const PresaleProvider: React.FC<PresaleProviderProps> = ({ children }) =>
         totalContributed: totalContributed as bigint,
         hardCap: (presaleConfig as any[])[5] as bigint,
         capPerLevel: capPerLevel as bigint,
-        contributedPerLevel: contributedPerLevel as bigint,
+        contributedPerLevel: contributedPerLevel as bigint
       })
     }
 

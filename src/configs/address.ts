@@ -2,7 +2,7 @@ export enum SupportedChainId {
   MAINNET = 1,
   BSC = 56,
   AVAX = 43114,
-  ARBI = 43621,
+  ARBI = 42161,
   BASE = 8453,
   GOERLI = 5,
   SEPOLIA = 11155111,

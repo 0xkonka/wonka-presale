@@ -61,28 +61,26 @@ const Stastics: React.FC<Props> = ({ config }) => {
           <Typography>{endTimeFormat}</Typography>
         </Stack>
         <Divider />
-        <Stack direction={'row'} justifyContent={'space-between'}>
+        {/*<Stack direction={'row'} justifyContent={'space-between'}>
           <Typography sx={{ mb: 1.5 }}>Softcap</Typography>
           <Typography>${formatUnits(config.softcap, 6)}</Typography>
-        </Stack>
-        <Divider />
+  </Stack>*/}
         <Stack direction={'row'} justifyContent={'space-between'}>
           <Typography sx={{ mb: 1.5 }}>Hardcap</Typography>
-          <Typography>${formatUnits(config.hardcap, 6)}</Typography>
+          <Typography>$10,000,000</Typography>
         </Stack>
         <Divider />
         <Stack direction={'row'} justifyContent={'space-between'}>
           <Typography sx={{ mb: 1.5 }}>Min Buy</Typography>
-          <Typography>${formatUnits(config.minContribution, 6)}</Typography>
+          <Typography>$10</Typography>
         </Stack>
-        <Divider />
-        <Stack direction={'row'} justifyContent={'space-between'}>
+        {/*<Stack direction={'row'} justifyContent={'space-between'}>
           <Typography sx={{ mb: 1.5 }}>Max Buy</Typography>
           <Typography>${formatUnits(config.maxContribution, 6)}</Typography>
-        </Stack>
+  </Stack>*/}
         <Divider />
         <Stack direction={'row'} justifyContent={'space-between'}>
-          <Typography sx={{ mb: 1.5 }}>Total raised(% of target )</Typography>
+          <Typography sx={{ mb: 1.5 }}>Total raised (% of target )</Typography>
           <Typography>${formatUnits(totalContributedAmount, 6)}</Typography>
         </Stack>
         <Divider />
