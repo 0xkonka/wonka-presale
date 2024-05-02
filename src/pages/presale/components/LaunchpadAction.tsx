@@ -38,7 +38,6 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
   const { totalContributedAmount, userInfo } = usePresale()
   const { minContribution: minPerTx } = config
   const { contributedAmount: userContributedAmount } = userInfo || {}
-  var dec = 6
 
   const { onApprove, onContribute, onClaim, isPending, isConfirming, isConfirmed, error } = usePresaleContract()
   const { refresh } = usePresale()
@@ -88,10 +87,6 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
   }
 
   if (!userInfo) return <></>
-
-  if (chainId == 56) {
-    dec = 12
-  }
 
   if (status === 'live') {
     return (
