@@ -29,20 +29,21 @@ export interface Props {
 const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
   const router = useRouter()
   const { ref } = router.query
-  
+
   const { status } = presaleState
   const buyTokenSymbol = 'usdc'
 
   const { address: account } = useAccount()
   const chainId = useChainId()
   const { totalContributedAmount, userInfo } = usePresale()
-  const { minContribution: minPerTx, maxContribution: maxPerUser } = config
+  const { minContribution: minPerTx } = config
   const { contributedAmount: userContributedAmount } = userInfo || {}
+  var dec = 6
 
   const { onApprove, onContribute, onClaim, isPending, isConfirming, isConfirmed, error } = usePresaleContract()
   const { refresh } = usePresale()
 
-  const [code, setCode] = useState<string>(ref as string || '')
+  const [code, setCode] = useState<string>((ref as string) || '')
   const [contributeAmount, setContributeAmount] = useState('')
 
   const { data: usdcBalance } = useReadContract({
@@ -88,7 +89,11 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
 
   if (!userInfo) return <></>
 
-  if (status === 'upcoming') {
+  if (chainId == 56) {
+    dec = 12
+  }
+
+  if (status === 'live') {
     return (
       <Typography>
         Balance : {usdcBalance ? formatUnits(usdcBalance!, 6) : 0} {buyTokenSymbol}{' '}
@@ -96,7 +101,7 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
     )
   }
 
-  if (status === 'live') {
+  if (status === 'upcoming') {
     return (
       <>
         <Stack direction='row' justifyContent='center'>
@@ -131,18 +136,12 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
           >
             Redeem Code
           </Button> */}
+
           <CustomTextField
             InputProps={{
               endAdornment: (
                 <InputAdornment position='end'>
-                  <Button
-                    sx={{ color: '#b79e30' }}
-                    onClick={() =>
-                      setContributeAmount(
-                        (usdcBalance! ?? 0) < maxPerUser ? formatUnits(usdcBalance!, 6) : formatUnits(maxPerUser, 6)
-                      )
-                    }
-                  >
+                  <Button sx={{ color: '#b79e30' }} onClick={() => setContributeAmount(formatUnits(usdcBalance!, 6))}>
                     MAX
                   </Button>
                 </InputAdornment>
@@ -150,9 +149,7 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
             }}
             value={contributeAmount}
             type='number'
-            placeholder={
-              usdcBalance ? (usdcBalance < maxPerUser ? formatUnits(usdcBalance!, 6) : formatUnits(maxPerUser, 6)) : '0'
-            }
+            placeholder={usdcBalance ? formatUnits(usdcBalance!, 6) : '0'}
             onChange={e => setContributeAmount(e.target.value)}
           />
           {(allowance ? +formatUnits(allowance, 6) : 0) >= +contributeAmount ? (

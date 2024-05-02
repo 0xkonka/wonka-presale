@@ -115,7 +115,7 @@ const App = (props: ExtendedAppProps) => {
       <Head>
         <title>{`${themeConfig.templateName}`}</title>
         <meta name='description' content={`The Chocolate Factory Auction`} />
-        <meta name='keywords' content='DeFi, Chocolate Factory' />
+        <meta name='keywords' content='Wonka Chocolate Factory' />
         <meta name='viewport' content='initial-scale=1, width=device-width' />
       </Head>
       <Web3Provider>
@@ -156,13 +156,13 @@ export const wagmiConfig = getDefaultConfig({
       wallets: [argentWallet, trustWallet, ledgerWallet]
     }
   ],
-  chains: [arbitrum, base, mainnet, avalanche, bsc],
+  chains: [arbitrum, base, mainnet, avalanche],
   transports: {
     [arbitrum.id]: http('https://arbitrum.llamarpc.com'),
     [base.id]: http('https://base.llamarpc.com'),
     [mainnet.id]: http('https://eth.llamarpc.com'),
-    [avalanche.id]: http('https://avalanche.drpc.org'),
-    [bsc.id]: http('https://binance.llamarpc.com')
+    [avalanche.id]: http('https://avalanche.drpc.org')
+    //[bsc.id]: http('https://binance.llamarpc.com')
   }
   // ssr: true
 })

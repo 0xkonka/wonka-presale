@@ -1,5 +1,5 @@
-
 import { Typography, Box, Stack, useTheme, Theme, useMediaQuery, Grid, Card, CardContent } from '@mui/material'
+import { useChainId } from 'wagmi'
 
 // Import Basic React
 import React, { useEffect, useState } from 'react'
@@ -20,7 +20,6 @@ import { hexToRGBA } from '@/@core/utils/hex-to-rgba'
 export type LaunchpadStatus = 'upcoming' | 'live' | 'ended' //'upcoming' | 'live' | 'filled' | 'ended' | 'claimable'
 
 const Presale = () => {
-  
   const { address: account } = useAccount()
   const { config, totalContributedAmount, presaleLevel, presaleStatus } = usePresale()
 
@@ -100,7 +99,7 @@ const Presale = () => {
                   </Box>
                   <Stack direction='row' sx={{ justifyContent: 'space-between' }}>
                     <Typography variant='subtitle2'>${formatUnits(totalContributedAmount, 6)}</Typography>
-                    <Typography variant='subtitle2'>${formatUnits(config.hardcap, 6)}</Typography>
+                    <Typography variant='subtitle2'>$10,000,000</Typography>
                   </Stack>
 
                   {account && <LaunchpadAction config={config} presaleState={presaleState} />}
@@ -110,12 +109,12 @@ const Presale = () => {
             <UserStatus config={config} />
           </Grid>
 
-          <Grid item xs={12} md={12} sx={{ display: 'flex', justifyContent: 'center' }}>
+          {/*<Grid item xs={12} md={12} sx={{ display: 'flex', justifyContent: 'center' }}>
             <StakedAmountInfo />
           </Grid>
           <Grid item xs={12} md={12}>
             <PresaleTable config={config} />
-          </Grid>
+                    </Grid>*/}
         </Grid>
       </Stack>
     </Box>
