@@ -1,7 +1,8 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { CSSProperties, useEffect, useMemo, useState } from 'react'
 import { type BaseError, useAccount, useChainId, useReadContract } from 'wagmi'
 import { erc20Abi, formatUnits, parseUnits } from 'viem'
 import { Button, InputAdornment, Stack, Typography } from '@mui/material'
+import ReactCodeInput from 'react-code-input'
 import { usePresale } from '@/context/PresaleContext'
 import { LaunchpadStatus } from '..'
 import CustomTextField from '@/@core/components/mui/text-field'
@@ -10,6 +11,7 @@ import usePresaleContract from '@/hooks/usePresaleContract'
 import { PresaleConfig } from '@/types/presale'
 import toast from 'react-hot-toast'
 import { showToast } from '@/hooks/toasts'
+import { useRouter } from 'next/router'
 
 // export interface Props {
 //   status: LaunchpadStatus
@@ -25,6 +27,9 @@ export interface Props {
 }
 
 const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
+  const router = useRouter()
+  const { ref } = router.query
+  
   const { status } = presaleState
   const buyTokenSymbol = 'usdc'
 
@@ -37,6 +42,7 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
   const { onApprove, onContribute, onClaim, isPending, isConfirming, isConfirmed, error } = usePresaleContract()
   const { refresh } = usePresale()
 
+  const [code, setCode] = useState<string>(ref as string || '')
   const [contributeAmount, setContributeAmount] = useState('')
 
   const { data: usdcBalance } = useReadContract({
@@ -66,10 +72,19 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
     refreshData()
   }, [isConfirmed])
 
-  const percentOfUserContribution = useMemo(() => {
-    if (!totalContributedAmount) return 0
-    return (Number(userContributedAmount) / Number(totalContributedAmount)) * 100
-  }, [totalContributedAmount, userContributedAmount])
+  const inputStyle: CSSProperties = {
+    height: 90,
+    width: '17%',
+    borderRadius: '6px',
+    padding: 3,
+    marginRight: 5,
+    background: 'transparent',
+    color: '#fff',
+    border: '1px solid #b79e30',
+    fontSize: 40,
+    textTransform: 'uppercase',
+    textAlign: 'center'
+  }
 
   if (!userInfo) return <></>
 
@@ -84,7 +99,38 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
   if (status === 'live') {
     return (
       <>
+        <Stack direction='row' justifyContent='center'>
+          {/* <Typography>InviteCode: </Typography> */}
+          <ReactCodeInput
+            name='pinCode'
+            type='text'
+            placeholder=''
+            fields={5}
+            onChange={setCode}
+            value={code}
+            inputMode='verbatim'
+            inputStyle={inputStyle}
+            autoFocus={true}
+            pattern='0-9'
+          />
+        </Stack>
         <Stack direction={'row'} justifyContent={'space-between'}>
+          {/* <Button
+            className='gradient-stroke-button'
+            onClick={() => enterCode()}
+            sx={{
+              py: { xs: 2, md: 3 },
+              px: 10,
+              fontSize: { xs: 14, lg: 20 },
+              borderRadius: '10px',
+              // color: {xs: '#FFF', md: '#67DAB1'}
+              color: '#020101',
+              background: '#67DAB1'
+            }}
+            variant='contained'
+          >
+            Redeem Code
+          </Button> */}
           <CustomTextField
             InputProps={{
               endAdornment: (
@@ -113,7 +159,7 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
             <Button
               variant='contained'
               color='primary'
-              onClick={() => onContribute(contributeAmount)}
+              onClick={() => onContribute(contributeAmount, code)}
               disabled={isPending || isConfirming}
               sx={{ background: '#b79e30' }}
             >
