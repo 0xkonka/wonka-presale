@@ -88,7 +88,7 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
 
   if (!userInfo) return <></>
 
-  if (status === 'live') {
+  if (status === 'upcoming') {
     return (
       <Typography>
         Balance : {usdcBalance ? formatUnits(usdcBalance!, 6) : 0} {buyTokenSymbol}{' '}
@@ -96,7 +96,7 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
     )
   }
 
-  if (status === 'upcoming') {
+  if (status === 'live') {
     return (
       <>
         <Stack direction='row' justifyContent='center'>
