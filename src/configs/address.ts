@@ -1,44 +1,52 @@
 export enum SupportedChainId {
-    MAINNET = 1,
-    BSC = 56,
-    AVAX = 43114,
-    ARBI = 43621,
-    BASE = 8453,
-    GOERLI = 5,
-    SEPOLIA = 11155111,
-    FUJI = 43113,
-    HEX_MAINNET = '0x1',
-    HEX_BSC = '0x38',
-    HEX_AVAX = '0xa86a',
-    HEX_ARBI = '0xa4b1',
-    HEX_BASE = '0x2105',
-    HEX_GOERLI = '0xaa36a7',
-    HEX_SEPOLIA = '0xaa36a7',
-    HEX_FUJI = '0xa869'
+  MAINNET = 1,
+  BSC = 56,
+  AVAX = 43114,
+  ARBI = 43621,
+  BASE = 8453,
+  GOERLI = 5,
+  SEPOLIA = 11155111,
+  FUJI = 43113,
+  HEX_MAINNET = '0x1',
+  HEX_BSC = '0x38',
+  HEX_AVAX = '0xa86a',
+  HEX_ARBI = '0xa4b1',
+  HEX_BASE = '0x2105',
+  HEX_GOERLI = '0xaa36a7',
+  HEX_SEPOLIA = '0xaa36a7',
+  HEX_FUJI = '0xa869'
 }
 
 type AddressMap = { [chainId: number]: string }
 
 export const USDC_ADDRESS: AddressMap = {
-    [SupportedChainId.GOERLI]: '',
-    [SupportedChainId.SEPOLIA]: '0xB88b5F025382AaDaC2F87A01f950223e7Ee68a1b',
-    [SupportedChainId.FUJI]: '0xD7df0E1B0ee1618638aAE3DD34B869eCA4660D13'
+  [SupportedChainId.MAINNET]: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
+  [SupportedChainId.BSC]: '0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d',
+  [SupportedChainId.AVAX]: '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E',
+  [SupportedChainId.ARBI]: '0xaf88d065e77c8cC2239327C5EDb3A432268e5831',
+  [SupportedChainId.BASE]: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'
 }
 
 export const WONKA_ADDRESS: AddressMap = {
-    [SupportedChainId.GOERLI]: '',
-    [SupportedChainId.SEPOLIA]: '0x9848422A708960e6f416f719006328077Ad1816A',
-    [SupportedChainId.FUJI]: '0x9c73CF53819E7fE7933950db8EBa83a1fB3b8f54'
+  [SupportedChainId.MAINNET]: '0xDc148914abe9a537D10748cE808db9eE5E90D614',
+  [SupportedChainId.BSC]: '0x022b85C5C1A287Cf58aA7d1bE09A6a6FECC2A516',
+  [SupportedChainId.AVAX]: '0x022b85C5C1A287Cf58aA7d1bE09A6a6FECC2A516',
+  [SupportedChainId.ARBI]: '0x022b85C5C1A287Cf58aA7d1bE09A6a6FECC2A516',
+  [SupportedChainId.BASE]: '0x022b85C5C1A287Cf58aA7d1bE09A6a6FECC2A516'
 }
 
 export const PRESALE_ADDRESS: AddressMap = {
-    [SupportedChainId.GOERLI]: '',
-    [SupportedChainId.SEPOLIA]: '0x7BB337ADE0cb6Ed0E6A77886Df8C17D66c5E738c',
-    [SupportedChainId.FUJI]: '0x57F7DA21Fb0a2d9AC90C066cA52A4af0f1339c06'
+  [SupportedChainId.MAINNET]: '0xEEAa3E47104e3d3dBD2322f91ad7029727824614',
+  [SupportedChainId.BSC]: '0x0EFC453677AF15cC6Bf915CB70CC0A05a09f08C3',
+  [SupportedChainId.AVAX]: '0x0EFC453677AF15cC6Bf915CB70CC0A05a09f08C3',
+  [SupportedChainId.ARBI]: '0x0EFC453677AF15cC6Bf915CB70CC0A05a09f08C3',
+  [SupportedChainId.BASE]: '0xE3AC7e70BB8D38A05F4367b94128ae8C9B3BC4C3'
 }
 
 export const LZEndpointAddress: AddressMap = {
-    [SupportedChainId.GOERLI]: '',
-    [SupportedChainId.SEPOLIA]: '0xae92d5aD7583AD66E49A0c67BAd18F6ba52dDDc1',
-    [SupportedChainId.FUJI]: '0x93f54D755A063cE7bB9e6Ac47Eccc8e33411d706'
+  [SupportedChainId.MAINNET]: '0x66A71Dcef29A0fFBDBE3c6a460a3B5BC225Cd675',
+  [SupportedChainId.BSC]: '0x3c2269811836af69497E5F486A85D7316753cf62',
+  [SupportedChainId.AVAX]: '0x3c2269811836af69497E5F486A85D7316753cf62',
+  [SupportedChainId.ARBI]: '0x3c2269811836af69497E5F486A85D7316753cf62',
+  [SupportedChainId.BASE]: '0x1a44076050125825900e736c501f859c50fE728c'
 }
