@@ -11,6 +11,7 @@ import usePresaleContract from '@/hooks/usePresaleContract'
 import { PresaleConfig } from '@/types/presale'
 import toast from 'react-hot-toast'
 import { showToast } from '@/hooks/toasts'
+import { useRouter } from 'next/router'
 
 // export interface Props {
 //   status: LaunchpadStatus
@@ -26,6 +27,9 @@ export interface Props {
 }
 
 const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
+  const router = useRouter()
+  const { ref } = router.query
+  
   const { status } = presaleState
   const buyTokenSymbol = 'usdc'
 
@@ -38,7 +42,7 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
   const { onApprove, onContribute, onClaim, isPending, isConfirming, isConfirmed, error } = usePresaleContract()
   const { refresh } = usePresale()
 
-  const [code, setCode] = useState('')
+  const [code, setCode] = useState<string>(ref as string || '')
   const [contributeAmount, setContributeAmount] = useState('')
 
   const { data: usdcBalance } = useReadContract({
@@ -74,12 +78,12 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
     borderRadius: '6px',
     padding: 3,
     marginRight: 5,
-    background:'transparent',
+    background: 'transparent',
     color: '#fff',
     border: '1px solid #b79e30',
     fontSize: 40,
     textTransform: 'uppercase',
-    textAlign: 'center',
+    textAlign: 'center'
   }
 
   if (!userInfo) return <></>
@@ -95,10 +99,7 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
   if (status === 'live') {
     return (
       <>
-        <Stack
-          direction='row'
-          justifyContent='center'
-        >
+        <Stack direction='row' justifyContent='center'>
           {/* <Typography>InviteCode: </Typography> */}
           <ReactCodeInput
             name='pinCode'

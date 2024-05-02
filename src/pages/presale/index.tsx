@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 
 import { Typography, Box, Stack, useTheme, Theme, useMediaQuery, Grid, Card, CardContent } from '@mui/material'
 
@@ -21,6 +20,7 @@ import { hexToRGBA } from '@/@core/utils/hex-to-rgba'
 export type LaunchpadStatus = 'upcoming' | 'live' | 'ended' //'upcoming' | 'live' | 'filled' | 'ended' | 'claimable'
 
 const Presale = () => {
+  
   const { address: account } = useAccount()
   const { config, totalContributedAmount, presaleLevel, presaleStatus } = usePresale()
 
