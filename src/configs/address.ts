@@ -33,8 +33,8 @@ export const WONKA_ADDRESS: AddressMap = {
 
 export const PRESALE_ADDRESS: AddressMap = {
     [SupportedChainId.GOERLI]: '',
-    [SupportedChainId.SEPOLIA]: '0x8F6964272516585167faEE7a04D2f048ae2d9cf9',
-    [SupportedChainId.FUJI]: '0xa19f263aA7439dbBc94bFd38DF0dec689664398b'
+    [SupportedChainId.SEPOLIA]: '0x7BB337ADE0cb6Ed0E6A77886Df8C17D66c5E738c',
+    [SupportedChainId.FUJI]: '0x57F7DA21Fb0a2d9AC90C066cA52A4af0f1339c06'
 }
 
 export const LZEndpointAddress: AddressMap = {

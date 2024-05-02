@@ -29,14 +29,14 @@ const usePresaleContract = () => {
     }
   }
 
-  const onContribute = (contributeAmount: string) => {
+  const onContribute = (contributeAmount: string, code: string) => {
     try {
       console.log('Contributing')
       writeContract({
         address: PRESALE_ADDRESS[chainId] as '0x{string}',
         abi: PRESALE_ABI,
         functionName: 'contribute',
-        args: [parseUnits(contributeAmount, 6)]
+        args: [parseUnits(contributeAmount, 6), code]
       })
     } catch (err) {
       console.log('err', err)
