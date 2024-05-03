@@ -88,10 +88,11 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
 
   if (!userInfo) return <></>
 
+  let dec = 18
   if (chainId == 56) {
-    var dec = 18
+    dec = 18
   } else {
-    var dec = 6
+    dec = 6
   }
 
   if (status === 'upcoming') {

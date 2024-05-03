@@ -14,11 +14,11 @@ const usePresaleContract = () => {
   const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
     hash: txhash
   })
-
+  let dec = 18
   if (chainId == 56) {
-    var dec = 18
+    dec = 18
   } else {
-    var dec = 6
+    dec = 6
   }
 
   const onApprove = (approveAmount: string) => {

@@ -24,10 +24,11 @@ const Presale = () => {
   const { config, totalContributedAmount, presaleLevel, presaleStatus } = usePresale()
   const chainId = useChainId()
 
+  let dec = 1e18
   if (chainId == 56) {
-    var dec = 1e18
+    dec = 1e18
   } else {
-    var dec = 1e6
+    dec = 1e6
   }
   const contributedPercent = ((Number(totalContributedAmount) / Number(2000000 * dec)) * 100).toFixed(4)
 
