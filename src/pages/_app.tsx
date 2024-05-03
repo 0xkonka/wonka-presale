@@ -162,7 +162,7 @@ export const wagmiConfig = getDefaultConfig({
     [base.id]: http('https://base.llamarpc.com'),
     [mainnet.id]: http('https://eth.llamarpc.com'),
     [avalanche.id]: http('https://avalanche.drpc.org'),
-    [bsc.id]: http('https://binance.llamarpc.com')
+    [bsc.id]: http('https://bsc-dataseed1.binance.org/')
   }
   // ssr: true
 })
