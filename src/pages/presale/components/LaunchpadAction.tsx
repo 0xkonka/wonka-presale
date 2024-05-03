@@ -31,7 +31,7 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
   const { ref } = router.query
 
   const { status } = presaleState
-  const buyTokenSymbol = 'usdc'
+  const buyTokenSymbol = 'USDC'
 
   const { address: account } = useAccount()
   const chainId = useChainId()
@@ -73,7 +73,7 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
   }, [isConfirmed])
 
   const inputStyle: CSSProperties = {
-    height: 90,
+    height: 40,
     width: '17%',
     borderRadius: '6px',
     padding: 3,
@@ -106,8 +106,8 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
   if (status === 'live') {
     return (
       <>
+        <Typography sx={{ marginTop: '20px' }}>Referral code: </Typography>
         <Stack direction='row' justifyContent='center'>
-          {/* <Typography>InviteCode: </Typography> */}
           <ReactCodeInput
             name='pinCode'
             type='text'
@@ -121,7 +121,7 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
             pattern='0-9'
           />
         </Stack>
-        <Stack direction={'row'} justifyContent={'space-between'}>
+        <Stack direction={'row'} justifyContent={'space-between'} sx={{ marginTop: '20px' }}>
           {/* <Button
             className='gradient-stroke-button'
             onClick={() => enterCode()}
@@ -151,7 +151,7 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
             }}
             value={contributeAmount}
             type='number'
-            placeholder={usdcBalance ? formatUnits(usdcBalance!, dec) : '0'}
+            placeholder={usdcBalance ? parseFloat(formatUnits(usdcBalance, dec)).toFixed(2) : '0'}
             onChange={e => setContributeAmount(e.target.value)}
           />
           {(allowance ? +formatUnits(allowance, dec) : 0) >= +contributeAmount ? (
@@ -162,7 +162,7 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
               disabled={isPending || isConfirming}
               sx={{ background: '#b79e30' }}
             >
-              Ape Now
+              Woomp In
             </Button>
           ) : (
             <Button
@@ -176,7 +176,14 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
           )}
         </Stack>
         <Typography>
-          Balance : {usdcBalance ? formatUnits(usdcBalance!, dec) : 0} {buyTokenSymbol}{' '}
+          Balance : {usdcBalance ? parseFloat(formatUnits(usdcBalance, dec)).toFixed(2) : 0} {buyTokenSymbol}{' '}
+        </Typography>
+        <Typography sx={{ marginTop: '10px' }}>
+          Need USDC on this chain? Swap any token to USDC from any chain using{' '}
+          <a href='https://bridge.chocolatefactory.gg' target='_blank' style={{ color: '#fff' }}>
+            Jumper
+          </a>{' '}
+          in 1 click
         </Typography>
       </>
     )
@@ -191,7 +198,7 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
           </Button>
         </Stack>
         <Typography>
-          Balance : {usdcBalance ? formatUnits(usdcBalance, dec) : 0} {buyTokenSymbol}{' '}
+          Balance : {usdcBalance ? parseFloat(formatUnits(usdcBalance, dec)).toFixed(2) : 0} {buyTokenSymbol}{' '}
         </Typography>
       </>
     )

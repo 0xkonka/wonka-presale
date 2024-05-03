@@ -9,7 +9,7 @@ const navigation = (): HorizontalNavItemsType => {
       path: '/presale'
     },
     {
-      title: 'Bridge',
+      title: 'Crosschain Swap',
       icon: 'bridge',
       path: 'https://bridge.chocolatefactory.gg',
       externalLink: true,

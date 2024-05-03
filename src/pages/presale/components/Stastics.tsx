@@ -39,14 +39,19 @@ const Stastics: React.FC<Props> = ({ config }) => {
     <Card sx={{ minWidth: 275, background: '#330246d4', borderRadius: '20px' }}>
       <CardContent>
         <Typography
-          variant='h3'
+          variant='h2'
           component='div'
-          sx={{ fontFamily: `'Britanica-HeavySemiExpanded', sans-serif`, color: '#c4a72a' }}
+          sx={{
+            fontFamily: `'Britanica-HeavySemiExpanded', sans-serif`,
+            color: '#c4a72a',
+            textAlign: 'center',
+            marginBottom: '20px'
+          }}
         >
-          The Chocolate Factory Auction
+          $WONKA Bootstrap Auction
         </Typography>
         <Divider />
-        <Typography sx={{ fontSize: 16 }} color='text.primary' gutterBottom>
+        <Typography sx={{ fontSize: 16, marginTop: '20px', marginBottom: '20px' }} color='text.primary' gutterBottom>
           $WONKA is the powerhouse of the Chocolate Factory's ecosystem with inbuilt deflationary flywheel tokenomics
           giving holders a direct share of the protocols growth through staking revenue & bonuses.
         </Typography>
