@@ -15,6 +15,12 @@ const usePresaleContract = () => {
     hash: txhash
   })
 
+  if (chainId == 56) {
+    var dec = 18
+  } else {
+    var dec = 6
+  }
+
   const onApprove = (approveAmount: string) => {
     try {
       console.log('Approving')
@@ -22,7 +28,7 @@ const usePresaleContract = () => {
         address: USDC_ADDRESS[chainId] as '0x{string}',
         abi: erc20Abi,
         functionName: 'approve',
-        args: [PRESALE_ADDRESS[chainId] as '0x{string}', parseUnits(approveAmount, 6)]
+        args: [PRESALE_ADDRESS[chainId] as '0x{string}', parseUnits(approveAmount, dec)]
       })
     } catch (err) {
       console.log('err', err)
@@ -36,7 +42,7 @@ const usePresaleContract = () => {
         address: PRESALE_ADDRESS[chainId] as '0x{string}',
         abi: PRESALE_ABI,
         functionName: 'contribute',
-        args: [parseUnits(contributeAmount, 6), code]
+        args: [parseUnits(contributeAmount, dec), code]
       })
     } catch (err) {
       console.log('err', err)

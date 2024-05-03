@@ -22,8 +22,14 @@ export type LaunchpadStatus = 'upcoming' | 'live' | 'ended' //'upcoming' | 'live
 const Presale = () => {
   const { address: account } = useAccount()
   const { config, totalContributedAmount, presaleLevel, presaleStatus } = usePresale()
+  const chainId = useChainId()
 
-  const contributedPercent = ((Number(totalContributedAmount) / Number(config?.hardcap)) * 100).toFixed(4)
+  if (chainId == 56) {
+    var dec = 1e18
+  } else {
+    var dec = 1e6
+  }
+  const contributedPercent = ((Number(totalContributedAmount) / Number(2000000 * dec)) * 100).toFixed(4)
 
   const [presaleState, setPresaleState] = React.useState({
     status: 'upcoming' as LaunchpadStatus,
@@ -70,7 +76,7 @@ const Presale = () => {
                   <LaunchpadTime presaleState={presaleState} />
                   {/* Contribute Progress bar */}
                   <Stack direction='row' sx={{ justifyContent: 'space-between' }}>
-                    <Typography variant='subtitle2'>Contributed</Typography>
+                    <Typography variant='subtitle2'>Contributed on current chain</Typography>
                     <Typography variant='subtitle2'> {contributedPercent} %</Typography>
                   </Stack>
                   <Box className='gradientProgress'>
@@ -99,7 +105,7 @@ const Presale = () => {
                   </Box>
                   <Stack direction='row' sx={{ justifyContent: 'space-between' }}>
                     <Typography variant='subtitle2'>${formatUnits(totalContributedAmount, 6)}</Typography>
-                    <Typography variant='subtitle2'>$10,000,000</Typography>
+                    <Typography variant='subtitle2'>$2,000,000 / chain</Typography>
                   </Stack>
 
                   {account && <LaunchpadAction config={config} presaleState={presaleState} />}

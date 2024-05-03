@@ -156,13 +156,13 @@ export const wagmiConfig = getDefaultConfig({
       wallets: [argentWallet, trustWallet, ledgerWallet]
     }
   ],
-  chains: [arbitrum, base, mainnet, avalanche],
+  chains: [arbitrum, base, mainnet, avalanche, bsc],
   transports: {
     [arbitrum.id]: http('https://arbitrum.llamarpc.com'),
     [base.id]: http('https://base.llamarpc.com'),
     [mainnet.id]: http('https://eth.llamarpc.com'),
-    [avalanche.id]: http('https://avalanche.drpc.org')
-    //[bsc.id]: http('https://binance.llamarpc.com')
+    [avalanche.id]: http('https://avalanche.drpc.org'),
+    [bsc.id]: http('https://binance.llamarpc.com')
   }
   // ssr: true
 })

@@ -80,7 +80,7 @@ const Stastics: React.FC<Props> = ({ config }) => {
   </Stack>*/}
         <Divider />
         <Stack direction={'row'} justifyContent={'space-between'}>
-          <Typography sx={{ mb: 1.5 }}>Total raised (% of target )</Typography>
+          <Typography sx={{ mb: 1.5 }}>Total raised on current chain</Typography>
           <Typography>${formatUnits(totalContributedAmount, 6)}</Typography>
         </Stack>
         <Divider />

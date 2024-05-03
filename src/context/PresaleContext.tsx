@@ -67,8 +67,8 @@ export const PresaleProvider: React.FC<PresaleProviderProps> = ({ children }) =>
   // })
 
   const fetchAllChainPresaleConfig = async () => {
-    const chains = [mainnet.id, avalanche.id, base.id, arbitrum.id]
-    const chainName = ['Ethereum', 'Avalanche', 'Base', 'Arbitrum']
+    const chains = [mainnet.id, avalanche.id, base.id, arbitrum.id, bsc.id]
+    const chainName = ['Ethereum', 'Avalanche', 'Base', 'Arbitrum', 'BSC']
     const _array: allPresaleInfo[] = []
 
     for (let i = 0; i < chains.length; i++) {

@@ -88,10 +88,16 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
 
   if (!userInfo) return <></>
 
+  if (chainId == 56) {
+    var dec = 18
+  } else {
+    var dec = 6
+  }
+
   if (status === 'upcoming') {
     return (
       <Typography>
-        Balance : {usdcBalance ? formatUnits(usdcBalance!, 6) : 0} {buyTokenSymbol}{' '}
+        Balance : {usdcBalance ? formatUnits(usdcBalance!, dec) : 0} {buyTokenSymbol}{' '}
       </Typography>
     )
   }
@@ -136,7 +142,7 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
             InputProps={{
               endAdornment: (
                 <InputAdornment position='end'>
-                  <Button sx={{ color: '#b79e30' }} onClick={() => setContributeAmount(formatUnits(usdcBalance!, 6))}>
+                  <Button sx={{ color: '#b79e30' }} onClick={() => setContributeAmount(formatUnits(usdcBalance!, dec))}>
                     MAX
                   </Button>
                 </InputAdornment>
@@ -144,10 +150,10 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
             }}
             value={contributeAmount}
             type='number'
-            placeholder={usdcBalance ? formatUnits(usdcBalance!, 6) : '0'}
+            placeholder={usdcBalance ? formatUnits(usdcBalance!, dec) : '0'}
             onChange={e => setContributeAmount(e.target.value)}
           />
-          {(allowance ? +formatUnits(allowance, 6) : 0) >= +contributeAmount ? (
+          {(allowance ? +formatUnits(allowance, dec) : 0) >= +contributeAmount ? (
             <Button
               variant='contained'
               color='primary'
@@ -169,7 +175,7 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
           )}
         </Stack>
         <Typography>
-          Balance : {usdcBalance ? formatUnits(usdcBalance!, 6) : 0} {buyTokenSymbol}{' '}
+          Balance : {usdcBalance ? formatUnits(usdcBalance!, dec) : 0} {buyTokenSymbol}{' '}
         </Typography>
       </>
     )
@@ -184,7 +190,7 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
           </Button>
         </Stack>
         <Typography>
-          Balance : {usdcBalance ? formatUnits(usdcBalance, 6) : 0} {buyTokenSymbol}{' '}
+          Balance : {usdcBalance ? formatUnits(usdcBalance, dec) : 0} {buyTokenSymbol}{' '}
         </Typography>
       </>
     )
@@ -199,7 +205,7 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
         </Button>
       </Stack>
       <Typography>
-        Balance : {formatUnits(usdcBalance!, 6) ?? 0} {buyTokenSymbol}{' '}
+        Balance : {formatUnits(usdcBalance!, dec) ?? 0} {buyTokenSymbol}{' '}
       </Typography>
     </>
   )
