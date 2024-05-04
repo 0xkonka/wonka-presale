@@ -7,6 +7,7 @@ import { Box, Card, CardContent, Grid, Slider, Stack } from '@mui/material'
 import { useAccount } from 'wagmi'
 import { PresaleConfig } from '@/types/presale'
 import { hexToRGBA } from '@/@core/utils/hex-to-rgba'
+import { useChainId } from 'wagmi'
 
 function formatDateTime(timestamp: number) {
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -28,13 +29,19 @@ interface Props {
 
 const Stastics: React.FC<Props> = ({ config }) => {
   const { address: account } = useAccount()
-  const { totalContributedAmount, presaleLevel } = usePresale()
+  const { totalContributedAmount, presaleLevel, wonkaPrice } = usePresale()
 
   const startTimeFormat = formatDateTime(Number(config?.startTime) * 1000)
   const endTimeFormat = formatDateTime(Number(config?.endTime) * 1000)
-
+  const chainId = useChainId()
+  let dec = 18
+  if (chainId == 56) {
+    dec = 18
+  } else {
+    dec = 6
+  }
   if (!config) return <></>
-
+  console.log('d', wonkaPrice)
   return (
     <Card sx={{ minWidth: 275, background: '#330246d4', borderRadius: '20px' }}>
       <CardContent>
@@ -86,13 +93,17 @@ const Stastics: React.FC<Props> = ({ config }) => {
         <Divider />
         <Stack direction={'row'} justifyContent={'space-between'}>
           <Typography sx={{ mb: 1.5 }}>Total raised on current chain</Typography>
-          <Typography>${formatUnits(totalContributedAmount, 6)}</Typography>
+          <Typography>${parseFloat(formatUnits(totalContributedAmount, dec)).toFixed(2)}</Typography>
         </Stack>
         <Divider />
         <Stack direction={'row'} justifyContent={'space-between'}>
           <Typography sx={{ mb: 1.5 }}>Presale Level</Typography>
           <Typography>{presaleLevel + 1}/8</Typography>
         </Stack>
+        {/*<Stack direction={'row'} justifyContent={'space-between'}>
+          <Typography sx={{ mb: 1.5 }}>Presale Level</Typography>
+          <Typography>{formatUnits(wonkaPrice)}</Typography>
+</Stack>*/}
         <Divider />
       </CardContent>
     </Card>

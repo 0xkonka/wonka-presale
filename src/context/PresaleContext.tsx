@@ -69,6 +69,7 @@ export const PresaleProvider: React.FC<PresaleProviderProps> = ({ children }) =>
   const fetchAllChainPresaleConfig = async () => {
     const chains = [mainnet.id, avalanche.id, base.id, arbitrum.id, bsc.id]
     const chainName = ['Ethereum', 'Avalanche', 'Base', 'Arbitrum', 'BSC']
+    const chainDec = [6, 6, 6, 6, 18]
     const _array: allPresaleInfo[] = []
 
     for (let i = 0; i < chains.length; i++) {
@@ -117,6 +118,7 @@ export const PresaleProvider: React.FC<PresaleProviderProps> = ({ children }) =>
       _array.push({
         chainId: chains[i],
         chainName: chainName[i],
+        chainDec: chainDec[i],
         totalContributed: totalContributed as bigint,
         hardCap: (presaleConfig as any[])[5] as bigint,
         capPerLevel: capPerLevel as bigint,

@@ -24,13 +24,14 @@ const Presale = () => {
   const { config, totalContributedAmount, presaleLevel, presaleStatus } = usePresale()
   const chainId = useChainId()
 
-  let dec = 1e18
+  let dec = 6
   if (chainId == 56) {
-    dec = 1e18
+    dec = 18
   } else {
-    dec = 1e6
+    dec = 6
   }
-  const contributedPercent = ((Number(totalContributedAmount) / Number(2000000 * dec)) * 100).toFixed(4)
+
+  const contributedPercent = ((parseFloat(formatUnits(totalContributedAmount, dec)) / Number(2000000)) * 100).toFixed(4)
 
   const [presaleState, setPresaleState] = React.useState({
     status: 'upcoming' as LaunchpadStatus,
@@ -105,7 +106,9 @@ const Presale = () => {
                     />
                   </Box>
                   <Stack direction='row' sx={{ justifyContent: 'space-between' }}>
-                    <Typography variant='subtitle2'>${formatUnits(totalContributedAmount, 6)}</Typography>
+                    <Typography variant='subtitle2'>
+                      ${parseFloat(formatUnits(totalContributedAmount, dec)).toFixed(2)}
+                    </Typography>
                     <Typography variant='subtitle2'>$2,000,000 / chain</Typography>
                   </Stack>
 
@@ -113,9 +116,11 @@ const Presale = () => {
                 </Stack>
               </CardContent>
             </Card>
+            {/*<UserStatus config={config} />*/}
+          </Grid>
+          <Grid item xs={12} md={12} sx={{}}>
             <UserStatus config={config} />
           </Grid>
-
           {/*<Grid item xs={12} md={12} sx={{ display: 'flex', justifyContent: 'center' }}>
             <StakedAmountInfo />
           </Grid>

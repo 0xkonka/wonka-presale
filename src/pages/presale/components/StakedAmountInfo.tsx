@@ -7,12 +7,20 @@ import { Typography, Stack, Theme, useTheme, useMediaQuery, Slider, Card } from 
 import { Box, maxWidth } from '@mui/system'
 import { formatUnits } from 'viem'
 import Divider from '@mui/material/Divider'
+import { useChainId } from 'wagmi'
 
 const StakedAmountInfo = () => {
   const theme: Theme = useTheme()
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'))
 
   const { totalContributedPerChain } = usePresale()
+  const chainId = useChainId()
+  let dec = 18
+  if (chainId == 56) {
+    dec = 18
+  } else {
+    dec = 6
+  }
 
   if (totalContributedPerChain.length === 0) return <div />
 
@@ -54,26 +62,29 @@ const StakedAmountInfo = () => {
             <Slider
               sx={{ width: { xs: '50%', xl: '730px' }, maxWidth: '100%', color: '#c4a72a' }}
               aria-labelledby='continuous-slider'
-              value={+formatUnits(id.totalContributed, 6)}
+              value={+parseFloat(formatUnits(id.totalContributed, id.chainDec)).toFixed(2)}
               min={0}
-              max={+formatUnits(id.hardCap, 6)}
+              max={2000000}
               valueLabelDisplay='on'
               marks={[
                 { value: 0, label: '$0' },
-                { value: +formatUnits(id.hardCap, 6), label: `$${+formatUnits(id.hardCap, 6)}` }
+                { value: 2000000, label: `$2000000` }
               ]}
             />
             Current Tier Progress:
             <Slider
               sx={{ width: { xs: '50%', xl: '730px' }, maxWidth: '100%', color: '#c4a72a' }}
               aria-labelledby='continuous-slider'
-              value={+formatUnits(id.contributedPerLevel, 6)}
+              value={+parseFloat(formatUnits(id.contributedPerLevel, id.chainDec)).toFixed(2)}
               min={0}
-              max={+formatUnits(id.capPerLevel, 6)}
+              max={+parseFloat(formatUnits(id.capPerLevel, id.chainDec)).toFixed(2)}
               valueLabelDisplay='on'
               marks={[
                 { value: 0, label: '$0' },
-                { value: +formatUnits(id.capPerLevel, 6), label: `$${+formatUnits(id.capPerLevel, 6)}` }
+                {
+                  value: +parseFloat(formatUnits(id.capPerLevel, id.chainDec)).toFixed(2),
+                  label: `$${+parseFloat(formatUnits(id.capPerLevel, id.chainDec)).toFixed(2)}`
+                }
               ]}
             />
           </Stack>
