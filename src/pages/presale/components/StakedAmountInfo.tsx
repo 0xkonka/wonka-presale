@@ -25,14 +25,23 @@ const StakedAmountInfo = () => {
   if (totalContributedPerChain.length === 0) return <div />
 
   return (
-    <Card sx={{ width: 'min-content', background: '#330246d4', borderRadius: '20px', paddingX: 15, paddingY: 5 }}>
-      <Stack direction='column' alignItems='center'>
+    <Card
+      sx={{
+        minWidth: 'min-content',
+        width: { xs: 350, md: '100%', xl: '100%' },
+        background: '#330246d4',
+        borderRadius: '20px',
+        paddingX: 15,
+        paddingY: 5
+      }}
+    >
+      <Stack direction='column' alignItems='center' sx={{ width: { xs: 350, md: '100%', xl: '100%' } }}>
         <Typography
           variant='h1'
           color='#c4a72a'
           sx={{
             mb: { xs: 5, md: 8 },
-            fontSize: { xs: 20, md: 20, xl: 30 },
+            fontSize: 30,
             fontWeight: 400,
             width: 730,
             maxWidth: '100%',
@@ -40,13 +49,23 @@ const StakedAmountInfo = () => {
             fontFamily: `'Britanica-HeavySemiExpanded', sans-serif`
           }}
         >
-          Auction Chain Race
+          $WONKA Chain Tiers
         </Typography>
-
+        <Typography
+          sx={{ fontSize: 16, marginTop: '0px', marginBottom: '30px', textAlign: 'center' }}
+          color='text.primary'
+          gutterBottom
+        >
+          Get a cheaper price per $WONKA by bridging to a chain at a lower tier! Use our{' '}
+          <a href='https://bridge.chocolatefactory.gg' target='_blank' style={{ color: '#fff' }}>
+            crosschain bridge
+          </a>{' '}
+          to get there in 1 click.
+        </Typography>
         {totalContributedPerChain.map((id, index) => (
           <Stack key={index} direction='column' alignItems='center' sx={{ paddingBottom: '30px' }}>
             <Typography
-              variant={isSmallScreen ? 'subtitle1' : 'h3'}
+              variant={isSmallScreen ? 'h4' : 'h3'}
               color='#c4a72a'
               sx={{
                 mt: { xs: 2, md: 4 },

@@ -29,19 +29,22 @@ interface Props {
 
 const Stastics: React.FC<Props> = ({ config }) => {
   const { address: account } = useAccount()
-  const { totalContributedAmount, presaleLevel, wonkaPrice } = usePresale()
+  const { totalContributedAmount, presaleLevel, wonkaPrice, totalContributedPerChain } = usePresale()
 
   const startTimeFormat = formatDateTime(Number(config?.startTime) * 1000)
   const endTimeFormat = formatDateTime(Number(config?.endTime) * 1000)
   const chainId = useChainId()
-  let dec = 18
+  let dec = 6
+  let dev = 1e6
   if (chainId == 56) {
     dec = 18
-  } else {
-    dec = 6
+    dev = 1
   }
+
   if (!config) return <></>
-  console.log('d', wonkaPrice)
+
+  const formatWonka = dev / Number(wonkaPrice)
+
   return (
     <Card sx={{ minWidth: 275, background: '#330246d4', borderRadius: '20px' }}>
       <CardContent>
@@ -73,6 +76,11 @@ const Stastics: React.FC<Props> = ({ config }) => {
           <Typography>{endTimeFormat}</Typography>
         </Stack>
         <Divider />
+        <Stack direction={'row'} justifyContent={'space-between'}>
+          <Typography sx={{ mb: 1.5 }}>Min Buy</Typography>
+          <Typography>$10</Typography>
+        </Stack>
+        <Divider />
         {/*<Stack direction={'row'} justifyContent={'space-between'}>
           <Typography sx={{ mb: 1.5 }}>Softcap</Typography>
           <Typography>${formatUnits(config.softcap, 6)}</Typography>
@@ -82,10 +90,12 @@ const Stastics: React.FC<Props> = ({ config }) => {
           <Typography>$10,000,000</Typography>
         </Stack>
         <Divider />
+
         <Stack direction={'row'} justifyContent={'space-between'}>
-          <Typography sx={{ mb: 1.5 }}>Min Buy</Typography>
-          <Typography>$10</Typography>
+          <Typography sx={{ mb: 1.5 }}>Current $WONKA Price</Typography>
+          <Typography>${(formatWonka * dev).toFixed(6)}</Typography>
         </Stack>
+
         {/*<Stack direction={'row'} justifyContent={'space-between'}>
           <Typography sx={{ mb: 1.5 }}>Max Buy</Typography>
           <Typography>${formatUnits(config.maxContribution, 6)}</Typography>
@@ -96,15 +106,11 @@ const Stastics: React.FC<Props> = ({ config }) => {
           <Typography>${parseFloat(formatUnits(totalContributedAmount, dec)).toFixed(2)}</Typography>
         </Stack>
         <Divider />
+
         <Stack direction={'row'} justifyContent={'space-between'}>
-          <Typography sx={{ mb: 1.5 }}>Presale Level</Typography>
+          <Typography sx={{ mb: 1.5 }}>Presale Level on current chain</Typography>
           <Typography>{presaleLevel + 1}/8</Typography>
         </Stack>
-        {/*<Stack direction={'row'} justifyContent={'space-between'}>
-          <Typography sx={{ mb: 1.5 }}>Presale Level</Typography>
-          <Typography>{formatUnits(wonkaPrice)}</Typography>
-</Stack>*/}
-        <Divider />
       </CardContent>
     </Card>
   )

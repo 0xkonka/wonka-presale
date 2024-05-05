@@ -106,7 +106,7 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
   if (status === 'live') {
     return (
       <>
-        <Typography sx={{ marginTop: '20px' }}>Referral code: </Typography>
+        <Typography sx={{ marginTop: '25px' }}>Referral code: </Typography>
         <Stack direction='row' justifyContent='center'>
           <ReactCodeInput
             name='pinCode'
@@ -121,7 +121,7 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
             pattern='0-9'
           />
         </Stack>
-        <Stack direction={'row'} justifyContent={'space-between'} sx={{ marginTop: '20px' }}>
+        <Stack direction={'row'} justifyContent={'space-between'} sx={{ marginTop: '25px' }}>
           {/* <Button
             className='gradient-stroke-button'
             onClick={() => enterCode()}
@@ -178,7 +178,7 @@ const LaunchpadAction: React.FC<Props> = ({ config, presaleState }) => {
         <Typography>
           Balance : {usdcBalance ? parseFloat(formatUnits(usdcBalance, dec)).toFixed(2) : 0} {buyTokenSymbol}{' '}
         </Typography>
-        <Typography sx={{ marginTop: '10px' }}>
+        <Typography sx={{ marginTop: '20px' }}>
           Need USDC on this chain? Swap any token to USDC from any chain using{' '}
           <a href='https://bridge.chocolatefactory.gg' target='_blank' style={{ color: '#fff' }}>
             Jumper

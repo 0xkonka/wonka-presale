@@ -6,6 +6,7 @@ import { Card, CardContent, Grid, Slider, Stack } from '@mui/material'
 import { formatEther, formatUnits } from 'viem'
 import { PresaleConfig } from '@/types/presale'
 import { hexToRGBA } from '@/@core/utils/hex-to-rgba'
+import { useChainId } from 'wagmi'
 
 interface Props {
   config: PresaleConfig
@@ -15,6 +16,13 @@ const UserStatus = ({ config }: Props) => {
   const { userInfo } = usePresale()
 
   const { contributedAmount, claimableAmount, pendingReward, status } = userInfo || {}
+  const chainId = useChainId()
+
+  let dec = 6
+
+  if (chainId == 56) {
+    dec = 18
+  }
 
   return (
     <Card sx={{ minWidth: 275, background: '#330246d4', borderRadius: '20px' }}>
@@ -29,7 +37,7 @@ const UserStatus = ({ config }: Props) => {
         <Divider />
         <Stack direction={'row'} justifyContent={'space-between'}>
           <Typography sx={{ mb: 1.5 }}>Contributed Amount</Typography>
-          <Typography>${contributedAmount ? (+formatUnits(contributedAmount, 6)).toFixed(2) : 0} </Typography>
+          <Typography>${contributedAmount ? (+formatUnits(contributedAmount, dec)).toFixed(2) : 0} </Typography>
         </Stack>
         <Divider />
         <Stack direction={'row'} justifyContent={'space-between'}>
@@ -38,7 +46,7 @@ const UserStatus = ({ config }: Props) => {
         </Stack>
         <Divider />
         <Stack direction={'row'} justifyContent={'space-between'}>
-          <Typography sx={{ mb: 1.5 }}>Reward Amount</Typography>
+          <Typography sx={{ mb: 1.5 }}>Cocoa Bean Bonus (Not yet started)</Typography>
           <Typography>{pendingReward ? formatEther(pendingReward) : 0} $WONKA</Typography>
         </Stack>
       </CardContent>

@@ -77,7 +77,7 @@ const Presale = () => {
                 <Stack direction={'column'} gap={2}>
                   <LaunchpadTime presaleState={presaleState} />
                   {/* Contribute Progress bar */}
-                  <Stack direction='row' sx={{ justifyContent: 'space-between', marginTop: '20px' }}>
+                  <Stack direction='row' sx={{ justifyContent: 'space-between', marginTop: '30px' }}>
                     <Typography variant='subtitle2'>Contributed on current chain</Typography>
                     <Typography variant='subtitle2'> {contributedPercent} %</Typography>
                   </Stack>
@@ -121,12 +121,12 @@ const Presale = () => {
           <Grid item xs={12} md={12} sx={{}}>
             <UserStatus config={config} />
           </Grid>
-          {/*<Grid item xs={12} md={12} sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Grid item xs={12} md={12} sx={{ display: 'flex', justifyContent: 'center' }}>
             <StakedAmountInfo />
           </Grid>
           <Grid item xs={12} md={12}>
             <PresaleTable config={config} />
-                    </Grid>*/}
+          </Grid>
         </Grid>
       </Stack>
     </Box>

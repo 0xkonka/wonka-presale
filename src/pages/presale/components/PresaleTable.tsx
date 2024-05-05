@@ -64,7 +64,7 @@ const PresaleTable: React.FC<Props> = ({ config }) => {
 
   const [levelArray, setLevelArray] = React.useState<levelArray[]>([])
   const [totalCap, setTotalCap] = React.useState<bigint>()
-
+  /*
   React.useEffect(() => {
     const _levelArray: levelArray[] = []
     let _totalCap = BigInt(0)
@@ -79,7 +79,7 @@ const PresaleTable: React.FC<Props> = ({ config }) => {
     }
     setLevelArray(_levelArray)
     setTotalCap(_totalCap)
-  }, [wonkaPrice, capAmount])
+  }, [wonkaPrice, capAmount])*/
 
   return (
     <TableContainer component={Paper} sx={{ borderRadius: '20px', backgroundColor: '#330246d4 !important' }}>
@@ -87,14 +87,14 @@ const PresaleTable: React.FC<Props> = ({ config }) => {
         <TableHead>
           <TableRow>
             <StyledTableCell>Auction Level</StyledTableCell>
-            <StyledTableCell align='right'>WONKA Price ($)</StyledTableCell>
+            <StyledTableCell align='right'>$WONKA Price</StyledTableCell>
             <StyledTableCell align='right'>Cap / Chain</StyledTableCell>
-            <StyledTableCell align='right'>Total Auctioned</StyledTableCell>
-            <StyledTableCell align='right'>% Supply Total</StyledTableCell>
+            <StyledTableCell align='right'>Total Level Cap</StyledTableCell>
+            <StyledTableCell align='right'>Supply Total % </StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {levelArray.map(item => (
+          {/*levelArray.map(item => (
             <StyledTableRow key={item.index}>
               <StyledTableCell component='th' scope='row'>
                 {item.index}
@@ -106,7 +106,89 @@ const PresaleTable: React.FC<Props> = ({ config }) => {
                 {((Number(item.capAmount) / Number(totalCap)) * 50).toFixed(2)}%
               </StyledTableCell>
             </StyledTableRow>
-          ))}
+          ))*/}
+
+          <StyledTableRow>
+            <StyledTableCell component='th' scope='row'>
+              1
+            </StyledTableCell>
+            <StyledTableCell align='right'>$0.000005</StyledTableCell>
+            <StyledTableCell align='right'>$100,000</StyledTableCell>
+            <StyledTableCell align='right'>$500,000</StyledTableCell>
+            <StyledTableCell align='right'>5%</StyledTableCell>
+          </StyledTableRow>
+          <StyledTableRow>
+            <StyledTableCell component='th' scope='row'>
+              2
+            </StyledTableCell>
+            <StyledTableCell align='right'>$0.000006</StyledTableCell>
+            <StyledTableCell align='right'>$120,000</StyledTableCell>
+            <StyledTableCell align='right'>$600,000</StyledTableCell>
+            <StyledTableCell align='right'>5%</StyledTableCell>
+          </StyledTableRow>
+          <StyledTableRow>
+            <StyledTableCell component='th' scope='row'>
+              3
+            </StyledTableCell>
+            <StyledTableCell align='right'>$0.0000072</StyledTableCell>
+            <StyledTableCell align='right'>$150,000</StyledTableCell>
+            <StyledTableCell align='right'>$750,000</StyledTableCell>
+            <StyledTableCell align='right'>5.2%</StyledTableCell>
+          </StyledTableRow>
+          <StyledTableRow>
+            <StyledTableCell component='th' scope='row'>
+              4
+            </StyledTableCell>
+            <StyledTableCell align='right'>$0.00000864</StyledTableCell>
+            <StyledTableCell align='right'>$200,000</StyledTableCell>
+            <StyledTableCell align='right'>$1,000,000</StyledTableCell>
+            <StyledTableCell align='right'>5.8%</StyledTableCell>
+          </StyledTableRow>
+          <StyledTableRow>
+            <StyledTableCell component='th' scope='row'>
+              5
+            </StyledTableCell>
+            <StyledTableCell align='right'>$0.00001037</StyledTableCell>
+            <StyledTableCell align='right'>$250,000</StyledTableCell>
+            <StyledTableCell align='right'>$1,250,000</StyledTableCell>
+            <StyledTableCell align='right'>6%</StyledTableCell>
+          </StyledTableRow>
+          <StyledTableRow>
+            <StyledTableCell component='th' scope='row'>
+              6
+            </StyledTableCell>
+            <StyledTableCell align='right'>$0.00001244</StyledTableCell>
+            <StyledTableCell align='right'>$300,000</StyledTableCell>
+            <StyledTableCell align='right'>$1,500,000</StyledTableCell>
+            <StyledTableCell align='right'>6%</StyledTableCell>
+          </StyledTableRow>
+          <StyledTableRow>
+            <StyledTableCell component='th' scope='row'>
+              7
+            </StyledTableCell>
+            <StyledTableCell align='right'>$0.00001493</StyledTableCell>
+            <StyledTableCell align='right'>$400,000</StyledTableCell>
+            <StyledTableCell align='right'>$2,000,000</StyledTableCell>
+            <StyledTableCell align='right'>6.7%</StyledTableCell>
+          </StyledTableRow>
+          <StyledTableRow>
+            <StyledTableCell component='th' scope='row'>
+              8
+            </StyledTableCell>
+            <StyledTableCell align='right'>$0.000017915</StyledTableCell>
+            <StyledTableCell align='right'>$480,000</StyledTableCell>
+            <StyledTableCell align='right'>$2,400,000</StyledTableCell>
+            <StyledTableCell align='right'>6.7%</StyledTableCell>
+          </StyledTableRow>
+          <StyledTableRow>
+            <StyledTableCell component='th' scope='row'>
+              Totals (10 Weeks)
+            </StyledTableCell>
+            <StyledTableCell align='right'>Launch at $0.00002</StyledTableCell>
+            <StyledTableCell align='right'>$2,000,000</StyledTableCell>
+            <StyledTableCell align='right'>$10,000,000</StyledTableCell>
+            <StyledTableCell align='right'>46.4%</StyledTableCell>
+          </StyledTableRow>
         </TableBody>
       </Table>
     </TableContainer>
