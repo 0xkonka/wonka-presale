@@ -158,9 +158,9 @@ export const wagmiConfig = getDefaultConfig({
   ],
   chains: [arbitrum, base, mainnet, avalanche, bsc],
   transports: {
-    [arbitrum.id]: http('https://arbitrum.llamarpc.com'),
-    [base.id]: http('https://base.llamarpc.com'),
-    [mainnet.id]: http('https://eth.llamarpc.com'),
+    [arbitrum.id]: http('https://arb1.arbitrum.io/rpc'),
+    [base.id]: http('https://mainnet.base.org'),
+    [mainnet.id]: http('https://ethereum-rpc.publicnode.com'),
     [avalanche.id]: http('https://avalanche.drpc.org'),
     [bsc.id]: http('https://bsc-dataseed1.binance.org/')
   }
