@@ -29,23 +29,50 @@ export interface ResponseFuncs {
 }
 
 const automateSwaps = async (
-    provider: ethers.providers.JsonRpcProvider,
-    privateKey: string,
-    tokenA: string,
-    tokenB: string,
+    baseToken: Token,
+    quoteToken: Token,
+    baseTokenSwapAmount: number,
+    quoteTokenSwapAmount: number,
     duration: number
 ) => {
     const endTime = Date.now() + duration
 
     while (Date.now() < endTime) {
-        // Swap tokenA to tokenB
-        await swapTokens(provider, privateKey, tokenA, tokenB, parseEther('1'))
-        console.log('swap tokenA completed')
-        // Wait for 5 seconds
-        await new Promise(resolve => setTimeout(resolve, 5000))
-        // Swap tokenB to tokenA
-        await swapTokens(provider, privateKey, tokenB, tokenA, parseUnits('1', 6))
-        console.log('swap tokenB completed')
+        let inputTokenAmount = new TokenAmount(
+            baseToken,
+            new BN(baseTokenSwapAmount).mul(new BN(10).pow(new BN(quoteToken.decimals)))
+        )
+        const slippage = new Percent(1, 100)
+
+        const targetPool = 'CimQKr5n4cD4kLP3vemH5rEiJc84jgL48ocV1BVo8xwW'
+
+        // swap WSOL to FURY
+        await execSwap({
+            targetPool,
+            outputToken: quoteToken,
+            inputTokenAmount,
+            slippage,
+            wallet: process.env.SOLANA_PRIVATE_KEY
+        })
+
+        console.log('Swap WSOL to FURY succesfully')
+
+        // swap FURY to WSOL
+
+        inputTokenAmount = new TokenAmount(
+            quoteToken,
+            new BN(quoteTokenSwapAmount).mul(new BN(10).pow(new BN(baseToken.decimals)))
+        )
+
+        await execSwap({
+            targetPool,
+            outputToken: baseToken,
+            inputTokenAmount,
+            slippage,
+            wallet: process.env.SOLANA_PRIVATE_KEY
+        })
+
+        console.log('Swap FURY to WSOL succesfully')
         // Wait for 5 seconds
         await new Promise(resolve => setTimeout(resolve, 5000))
     }
@@ -61,14 +88,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         },
         // RESPONSE POST REQUESTS
         POST: async (req: NextApiRequest, res: NextApiResponse) => {
+            const { baseTokenSwapAmount, quoteTokenSwapAmount } = req.body
+
             try {
+                const baseToken = DEFAULT_TOKEN.WSOL // WSOL
+
                 const quoteTokenInfo = {
                     decimals: 9,
-                    symbol: 'FURY',
-                    tokenName: 'FURY'
+                    symbol: 'Test1',
+                    tokenName: 'Test1'
                 }
-
-                const baseToken = DEFAULT_TOKEN.WSOL // WSOL
                 const quoteToken = new Token(
                     TOKEN_PROGRAM_ID,
                     new PublicKey('7oU5jRkqjjKD4a9JBDPZvs6X4zPJSvqXHDECRbb9jYNH'),
@@ -77,45 +106,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     quoteTokenInfo.tokenName
                 )
 
-                let swapTokenAmountTotal = 200
-
-                let outputTokenAmount = new TokenAmount(
-                    quoteToken,
-                    new BN(swapTokenAmountTotal).mul(new BN(10).pow(new BN(quoteToken.decimals)))
-                )
-                const slippage = new Percent(1, 100)
-
-                // console.log('outputTokenAmount', outputTokenAmount)
-
-                const targetPool = 'CimQKr5n4cD4kLP3vemH5rEiJc84jgL48ocV1BVo8xwW'
-
-                // swap WSOL to FURY
-                await execSwap({
-                    targetPool,
-                    inputToken: baseToken,
-                    outputTokenAmount,
-                    slippage,
-                    wallet: process.env.SOLANA_PRIVATE_KEY
-                })
-
-                // swap FURY to WSOL
-
-                swapTokenAmountTotal = 1
-
-                outputTokenAmount = new TokenAmount(
-                    baseToken,
-                    new BN(swapTokenAmountTotal).mul(new BN(10).pow(new BN(baseToken.decimals)))
-                )
-
-                console.log('outputTokenAmount', outputTokenAmount)
-
-                await execSwap({
-                    targetPool,
-                    inputToken: quoteToken,
-                    outputTokenAmount,
-                    slippage,
-                    wallet: process.env.SOLANA_PRIVATE_KEY
-                })
+                await automateSwaps(baseToken, quoteToken, +baseTokenSwapAmount, +quoteTokenSwapAmount, 3600000)
 
                 res.status(200).json({ message: 'Solana Trade process completed successfully' })
             } catch (error) {
