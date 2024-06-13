@@ -3,7 +3,7 @@ import os
 import requests
 from dotenv import load_dotenv
 
-# Load environment variables
+# Load environment variables 1
 load_dotenv('.env')
 bot_token = os.getenv('BOT_TOKEN', '')
 bot = telebot.TeleBot(bot_token)
