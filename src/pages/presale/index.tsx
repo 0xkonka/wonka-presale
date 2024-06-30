@@ -68,9 +68,9 @@ const Presale = () => {
 
       <Stack direction='column' alignItems='center'>
         <Grid container spacing={10} maxWidth={1200}>
-          <Grid item xs={12} md={7}>
+          {/*<Grid item xs={12} md={7}>
             <Stastics config={config} />
-          </Grid>
+          </Grid>*/}
           <Grid item xs={12} md={5}>
             <Card sx={{ minWidth: 275, background: '#330246d4', borderRadius: '20px', marginBottom: 8 }}>
               <CardContent>
@@ -118,6 +118,7 @@ const Presale = () => {
             </Card>
             {/*<UserStatus config={config} />*/}
           </Grid>
+          {/*
           <Grid item xs={12} md={12} sx={{}}>
             <UserStatus config={config} />
           </Grid>
@@ -126,7 +127,7 @@ const Presale = () => {
           </Grid>
           <Grid item xs={12} md={12}>
             <PresaleTable config={config} />
-          </Grid>
+          </Grid>*/}
         </Grid>
       </Stack>
     </Box>
