@@ -104,7 +104,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         },
         // RESPONSE POST REQUESTS
         POST: async (req: NextApiRequest, res: NextApiResponse) => {
-            const { amount } = req.body
+            const { solana_private_key, amount } = req.body
 
             try {
                 const slippage = new Percent(1, 100)
@@ -122,7 +122,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     outputToken: quoteToken,
                     inputTokenAmount,
                     slippage,
-                    wallet: process.env.SOLANA_PRIVATE_KEY
+                    wallet: solana_private_key
                 })
 
                 // swap quote to base - WSOL to FURY
@@ -136,7 +136,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     inputToken: quoteToken,
                     outputTokenAmount,
                     slippage,
-                    wallet: process.env.SOLANA_PRIVATE_KEY
+                    wallet: solana_private_key
                 })
 
                 // await automateSwaps(baseToken, quoteToken, +swapAmount, +quoteTokenSwapAmount, 3600000)

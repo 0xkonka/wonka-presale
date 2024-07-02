@@ -4,7 +4,7 @@ import { Currency, Token, TxVersion, TOKEN_PROGRAM_ID, LOOKUP_TABLE_CACHE } from
 
 export const connection = new Connection(process.env.RPC_URL) // helius
 
-export const myKeyPair = Keypair.fromSecretKey(new Uint8Array(bs58.decode(process.env.SOLANA_PRIVATE_KEY)))
+// export const myKeyPair = Keypair.fromSecretKey(new Uint8Array(bs58.decode(process.env.SOLANA_PRIVATE_KEY)))
 
 export const makeTxVersion = TxVersion.V0
 

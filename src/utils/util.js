@@ -12,7 +12,7 @@ import {
 } from '@raydium-io/raydium-sdk'
 import { PublicKey, VersionedTransaction } from '@solana/web3.js'
 
-import { myKeyPair, connection, makeTxVersion, addLookupTableInfo } from './config'
+import { connection, makeTxVersion, addLookupTableInfo } from './config'
 
 export async function sendTx(connection, payer, txs, options) {
   const txids = []
@@ -38,17 +38,17 @@ export async function getWalletTokenAccount(connection, myKeyPair) {
   }))
 }
 
-export async function buildAndSendTx(innerSimpleV0Transaction, options) {
-  const willSendTx = await buildSimpleTransaction({
-    connection,
-    makeTxVersion,
-    payer: myKeyPair.publicKey,
-    innerTransactions: innerSimpleV0Transaction,
-    addLookupTableInfo: addLookupTableInfo
-  })
+// export async function buildAndSendTx(innerSimpleV0Transaction, options) {
+//   const willSendTx = await buildSimpleTransaction({
+//     connection,
+//     makeTxVersion,
+//     payer: myKeyPair.publicKey,
+//     innerTransactions: innerSimpleV0Transaction,
+//     addLookupTableInfo: addLookupTableInfo
+//   })
 
-  return await sendTx(connection, myKeyPair, willSendTx, options)
-}
+//   return await sendTx(connection, myKeyPair, willSendTx, options)
+// }
 
 export function getATAAddress(programId, owner, mint) {
   const { publicKey, nonce } = findProgramAddress(
