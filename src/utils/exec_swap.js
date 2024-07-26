@@ -112,7 +112,7 @@ export async function execSwapTokensForExactTokens(input) {
     try {
       targetPoolInfo = await formatAmmKeysById(input.targetPool)
       if (targetPoolInfo) {
-        console.log('targetPoolInfo', targetPoolInfo)
+        // console.log('targetPoolInfo', targetPoolInfo)
         break // If successful, exit the loop
       }
     } catch (error) {
