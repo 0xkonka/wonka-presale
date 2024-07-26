@@ -91,13 +91,15 @@ export async function execSwapExactTokensForTokens(input) {
     if (iTx instanceof VersionedTransaction) {
       iTx.sign([myKeyPair])
       txids.push(await connection.sendTransaction(iTx, { skipPreflight: true }))
+      // txids.push(await sendAndConfirmTransaction(connection, iTx))
     } else {
       txids.push(await connection.sendTransaction(iTx, [myKeyPair], { skipPreflight: true }))
+      // txids.push(await sendAndConfirmTransaction(connection, iTx, [myKeyPair]))
     }
   }
   console.log('swapped for ', myPublicKey)
   console.log('txids : ', txids)
-  return txids;
+  return txids
 }
 
 export async function execSwapTokensForExactTokens(input) {
@@ -183,14 +185,31 @@ export async function execSwapTokensForExactTokens(input) {
     if (iTx instanceof VersionedTransaction) {
       iTx.sign([myKeyPair])
       txids.push(await connection.sendTransaction(iTx, { skipPreflight: true }))
+      // txids.push(await sendAndConfirmTransaction(connection, iTx))
     } else {
+      // txids.push(await sendAndConfirmTransaction(connection, iTx, [myKeyPair]))
       txids.push(await connection.sendTransaction(iTx, [myKeyPair], { skipPreflight: true }))
     }
   }
   console.log('swapped for ', myPublicKey)
   console.log('txids : ', txids)
-  return txids;
+  return txids
 }
+
+// async function sendAndConfirmTransaction(connection, transaction, signers, retries = 3, timeout = 120000) {
+//   let txid
+//   for (let i = 0; i < retries; i++) {
+//     try {
+//       txid = await connection.sendTransaction(transaction, signers, { skipPreflight: false })
+//       await connection.confirmTransaction(txid, 'finalized', timeout)
+//       return txid
+//     } catch (error) {
+//       console.error(`Transaction attempt ${i + 1} failed:`, error)
+//       await sleepTime(2000) // Wait 2 seconds before retrying
+//     }
+//   }
+//   throw new Error(`Failed to confirm transaction after ${retries} attempts`)
+// }
 module.exports = {
   execSwapExactTokensForTokens,
   execSwapTokensForExactTokens

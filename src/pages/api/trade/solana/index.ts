@@ -32,9 +32,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const handleCase: ResponseFuncs = {
         GET: async (req: NextApiRequest, res: NextApiResponse) => {
-            res
-                .status(200)
-                .json({ result: true, data: { baseToken: baseToken.programId, quoteToken: quoteToken.programId } })
+            res.status(200).json({ result: true, data: { baseToken: baseToken.programId, quoteToken: quoteToken.programId } })
         },
         POST: async (req: NextApiRequest, res: NextApiResponse) => {
             const { solana_private_key, amount } = req.body
@@ -48,8 +46,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 // swap base to quote - FURY to WSOL
                 const inputTokenAmount = new TokenAmount(
                     baseToken,
-                    new BN(150 * 10 ** 9)
-                    // .mul(new BN(10).pow(new BN(quoteToken.decimals)))
+                    new BN(amount).mul(new BN(10).pow(new BN(quoteToken.decimals)))
                 )
 
                 const hash1 = await execSwapExactTokensForTokens({
@@ -62,9 +59,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
                 // swap quote to base - WSOL to FURY
                 const outputTokenAmount = new TokenAmount(
-                    quoteToken,
-                    new BN(0.0001 * 10 ** 9)
-                    // .mul(new BN(10).pow(new BN(quoteToken.decimals)))
+                    baseToken,
+                    new BN(amount).mul(new BN(10).pow(new BN(quoteToken.decimals)))
                 )
 
                 const hash2 = await execSwapTokensForExactTokens({
